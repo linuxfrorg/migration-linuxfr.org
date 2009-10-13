@@ -1,0 +1,9 @@
+templeet:
+  database: linuxfr
+  username: linuxfr
+  password: change-me
+
+rails:
+  database: linuxfr_production
+  username: linuxfr
+  password: change-me
