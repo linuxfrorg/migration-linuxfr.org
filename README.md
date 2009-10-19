@@ -16,41 +16,41 @@ Légende :
  - O : ces données seront importées
 
 Les tables :
- - X `avis` : les votes des relecteurs/modérateurs sur les dépêches
+ - X `avis` : les votes des relecteurs/modérateurs sur les dépêches. Effet : perte de statistiques de modération (nombre d'avis des modérateurs, liste des anciens modérateurs, etc.)
  - X `board` : les messages dans les tribunes ont une durée de vie limitée, et ne seront pas importés.
- - **?** `board_denied` : il y a actuellement 19 interdictions de tribune. On propose une amnistie ?
- - O `comments`
- - X `comments_scored_user` : les pertinents/inutiles sur les commentaires. Les votes de plus d'un mois étaient purgés. Pas très intéressant à conserver.
- - **?** `commentsnew` : c'est quoi la différence avec comments ? Ça a l'air d'être uniquement des vieux commentaires (contraitement à ce que le nom de la table laisserait penser).
- - **?** `contents_scored` : les pertinents/inutiles sur les contenus
+ - X `board_denied` : il y a actuellement 19 interdictions de tribune. Amnistie.
+ - O `comments` : attention aux contenus masqués par raison légale ou par choix de l'auteur
+ - O `comments_scored_user` : les pertinents/inutiles sur les commentaires. Données de 2004 à 2009.
+ - X `commentsnew` : table obsolète y compris pour l'ancienne version...
+ - O `contents_scored` : les pertinents/inutiles sur les contenus
  - O `forums_data` : à importer dans `posts`
  - O `forums_group` : à importer dans `forums`
  - O `interest` : à importer dans `nodes`
  - O `interviews` : à importer dans `interviews`
- - **?** `lang` : à mettre dans le dictionnaire ?
+ - **?** `lang` : liste des drapeaux pour les langues des documents pointés par les URL
  - X `locks`
- - **?** `messages` : pour le moment, nous n'avons pas de messagerie, et de toute façon, les messages ont une durée de vie limitée
+ - **?** `messages` : pour le moment, nous n'avons pas de messagerie, et de toute façon, les messages ont une durée de vie limitée. Prévoir de les envoyer par courriel aux concernés avant suppression.
  - **?** `moderator_last` : à importer pour les stats (savoir qui a été modérateur dans le passé) ?
- - O `news` : il faut bien entendu importer les dépêches
+ - O `news` : il faut bien entendu importer les dépêches. Acceptées/rejetées/etc.
  - O `news_attachements` : les secondes parties des dépêches
  - O `news_author` : les auteurs de dépêches (pas toujours authentifiés)
- - **?** `news_history` : est-ce utile d'importer les modifications sur les dépêches ?
+ - **?** `news_history` : est-ce utile d'importer les modifications sur les dépêches ? Légalement ça pourrait être utile...
  - O `news_moderated` : on importe seulement une modération par dépêche
  - O `news_urls` : les liens des dépêches
  - O `poll_answers` : les propositions de réponse aux sondages
  - X `poll_ip` : cette table est de toute façon vidée une fois par nuit
  - O `poll_questions` : les questions des sondages
- - X `prizes` : ce sont uniquement les prix du mois courant, et il n'y a rien de prévu pour utiliser ces infos sur le nouveau site
+ - X `prizes` : ce sont uniquement les prix du mois courant, et il n'y a rien de prévu pour utiliser ces infos sur le nouveau site. Et on n'en sert plus ?
  - O `sections` : les sections des dépêches
  - X `sessions` : on ne pourra rien en faire
- - X `sig` : visiblement, cette table ne sert pas à grand chose
+ - X `sig` : visiblement, cette table ne sert pas à grand chose. Les signatures ont été transférées dans la table users...
  - X `tag` : cette table ne servait pas
  - X `tagmap` : idem
  - X `tagvote` : idem
  - O `topics` : les sujets des dépêches
- - **?** `tracker` : est-ce que l'on purge le tracker ? Les entrées du suivi ne seront plus valides, mais souhaite-t-on conserver un historique ?
- - **?** `tracker_category` : est-ce que l'on importe ces catégories ou on en crée de nouvelles plus en adéquation avec la nouvelle version ?
- - **?** `tribune` : quelle différence par rapport à la table `board` ?
+ - **?** `tracker` : est-ce que l'on purge le tracker ? Les entrées du suivi ne seront plus valides, mais souhaite-t-on conserver un historique ? Traitement manuel pour garder les bonnées idées ?
+ - **?** `tracker_category` : est-ce que l'on importe ces catégories ou on en crée de nouvelles plus en adéquation avec la nouvelle version ? ça va changer beaucoup de choses ?
+ - **?** `tribune` : quelle différence par rapport à la table `board` ? La tribune d'origine vs les tribunes de modération, d'AMR, etc.
  - X `urls_avgtime` : stats pour les admins uniquement `->` plus valide après la migration
  - O `users` : les utilisateurs ne vont pas être contents si on n'importe pas leurs comptes (attention au mot de passe)
  - X `users_boxes` : ça n'existe plus sur le nouveau site
