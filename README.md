@@ -27,9 +27,9 @@ Les tables :
  - O `forums_group` : à importer dans `forums`
  - O `interest` : à importer dans `nodes`
  - O `interviews` : à importer dans `interviews`
- - **?** `lang` : liste des drapeaux pour les langues des documents pointés par les URL
+ - O `lang` : liste des drapeaux pour les langues des documents pointés par les URL
  - X `locks`
- - **?** `messages` : pour le moment, nous n'avons pas de messagerie, et de toute façon, les messages ont une durée de vie limitée. Prévoir de les envoyer par courriel aux concernés avant suppression.
+ - X `messages` : pour le moment, nous n'avons pas de messagerie, et de toute façon, les messages ont une durée de vie limitée. Prévoir de les envoyer par courriel aux concernés avant suppression.
  - **?** `moderator_last` : à importer pour les stats (savoir qui a été modérateur dans le passé) ?
  - O `news` : il faut bien entendu importer les dépêches. Acceptées/rejetées/etc.
  - O `news_attachements` : les secondes parties des dépêches
@@ -49,8 +49,8 @@ Les tables :
  - X `tagvote` : idem
  - O `topics` : les sujets des dépêches
  - **?** `tracker` : est-ce que l'on purge le tracker ? Les entrées du suivi ne seront plus valides, mais souhaite-t-on conserver un historique ? Traitement manuel pour garder les bonnées idées ?
- - **?** `tracker_category` : est-ce que l'on importe ces catégories ou on en crée de nouvelles plus en adéquation avec la nouvelle version ? ça va changer beaucoup de choses ?
- - **?** `tribune` : quelle différence par rapport à la table `board` ? La tribune d'origine vs les tribunes de modération, d'AMR, etc.
+ - X `tracker_category` : on va créer des catégories plus en adéquation avec la nouvelle version
+ - X `tribune` : quelle différence par rapport à la table `board` ? La tribune d'origine vs les tribunes de modération, d'AMR, etc.
  - X `urls_avgtime` : stats pour les admins uniquement `->` plus valide après la migration
  - O `users` : les utilisateurs ne vont pas être contents si on n'importe pas leurs comptes (attention au mot de passe)
  - X `users_boxes` : ça n'existe plus sur le nouveau site
@@ -76,4 +76,6 @@ En pratique
     (attendre un bon moment)
 
     $ ./import.rb
+
+    $ rake friendly_id:make_slugs
 
