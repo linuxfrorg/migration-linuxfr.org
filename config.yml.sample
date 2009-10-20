@@ -1,5 +1,5 @@
 templeet:
-  database: linuxfr
+  database: linuxfr_templeet
   username: linuxfr
   password: change-me
 
@@ -7,3 +7,4 @@ rails:
   database: linuxfr_production
   username: linuxfr
   password: change-me
+  encoding: utf8

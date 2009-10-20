@@ -67,6 +67,8 @@ Les tables :
 En pratique
 -----------
 
+    $ gem install stephencelis-dots sequel
+
     $ cp config.yml{.sample,} && vim config.yml
 
     $ mysql -u root
@@ -78,4 +80,11 @@ En pratique
     $ ./import.rb
 
     $ rake friendly_id:make_slugs
+
+
+Autres / TODO
+-------------
+
+ - Penser à créer les redirections pour les pages HTML
+ - Importer les anciens mots de passe hashés
 
