@@ -14,4 +14,5 @@ load "lib/users.rb"
 load "lib/diaries.rb"
 load "lib/forums.rb"
 load "lib/posts.rb"
+load "lib/interviews.rb"
 
