@@ -9,5 +9,7 @@ cfg = YAML.load_file('config.yml')
 TPL = Sequel.mysql(cfg['templeet'])
 ROR = Sequel.mysql(cfg['rails'])
 
-load "import/users.rb"
+load "lib/constants.rb"
+#load "lib/users.rb"
+load "lib/diaries.rb"
 

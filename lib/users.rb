@@ -21,7 +21,6 @@ ROR.transaction do
 
   users = TPL[:users].select(:id, :lname, :fname, :login, :email, :homesite, :jabber_id, :status, :created, :level)
   users.where('id != 1 AND status != 0').each do |user|
-    id = user[:id]
     $stdout.print '.' if user[:id] % 100 == 0
     name  = [user[:lname], user[:fname]].compact
     name  = name.empty? ? user[:login] : name.join(' ')

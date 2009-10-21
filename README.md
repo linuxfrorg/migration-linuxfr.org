@@ -14,6 +14,7 @@ Légende :
  - **?** : je ne sais pas encore
  - X : ces données ne seront pas importées car elles sont considérées comme inutiles
  - O : ces données seront importées
+ - M : les données ne seront pas importées, mais elles seront envoyées par mail
 
 Les tables :
  - X `avis` : les votes des relecteurs/modérateurs sur les dépêches. Effet : perte de statistiques de modération (nombre d'avis des modérateurs, liste des anciens modérateurs, etc.)
@@ -29,7 +30,7 @@ Les tables :
  - O `interviews` : à importer dans `interviews`
  - O `lang` : liste des drapeaux pour les langues des documents pointés par les URL
  - X `locks`
- - X `messages` : pour le moment, nous n'avons pas de messagerie, et de toute façon, les messages ont une durée de vie limitée. Prévoir de les envoyer par courriel aux concernés avant suppression.
+ - M `messages` : pour le moment, nous n'avons pas de messagerie, et de toute façon, les messages ont une durée de vie limitée. Prévoir de les envoyer par courriel aux concernés avant suppression.
  - **?** `moderator_last` : à importer pour les stats (savoir qui a été modérateur dans le passé) ?
  - O `news` : il faut bien entendu importer les dépêches. Acceptées/rejetées/etc.
  - O `news_attachements` : les secondes parties des dépêches
@@ -40,7 +41,7 @@ Les tables :
  - O `poll_answers` : les propositions de réponse aux sondages
  - X `poll_ip` : cette table est de toute façon vidée une fois par nuit
  - O `poll_questions` : les questions des sondages
- - X `prizes` : ce sont uniquement les prix du mois courant, et il n'y a rien de prévu pour utiliser ces infos sur le nouveau site. Et on n'en sert plus ?
+ - X `prizes` : ce sont uniquement les prix du mois courant, et il n'y a rien de prévu pour utiliser ces infos sur le nouveau site.
  - O `sections` : les sections des dépêches
  - X `sessions` : on ne pourra rien en faire
  - X `sig` : visiblement, cette table ne sert pas à grand chose. Les signatures ont été transférées dans la table users...
@@ -48,7 +49,7 @@ Les tables :
  - X `tagmap` : idem
  - X `tagvote` : idem
  - O `topics` : les sujets des dépêches
- - **?** `tracker` : est-ce que l'on purge le tracker ? Les entrées du suivi ne seront plus valides, mais souhaite-t-on conserver un historique ? Traitement manuel pour garder les bonnées idées ?
+ - X `tracker` : traitement manuel pour garder les bonnées idées
  - X `tracker_category` : on va créer des catégories plus en adéquation avec la nouvelle version
  - X `tribune` : quelle différence par rapport à la table `board` ? La tribune d'origine vs les tribunes de modération, d'AMR, etc.
  - X `urls_avgtime` : stats pour les admins uniquement `->` plus valide après la migration
@@ -59,7 +60,7 @@ Les tables :
  - **?** `users_karma` : on n'a pas encore de karma sur le nouveau site
  - **?** `users_karma_archive` : idem
  - X `users_lastseen` : la date de dernière visite d'un contenu `->` on purge
- - **?** `users_personnalboxes` : ça n'existe plus sur le nouveau site, mais il faudrait peut être fournir un moyen aux utilisateurs de récupérer ça
+ - M `users_personnalboxes` : ça n'existe plus sur le nouveau site, mais il faudrait peut être fournir un moyen aux utilisateurs de récupérer ça
  - X `users_rdf`
  - X `users_tempo` : table temporaire pour les nouveaux inscrits / changement de mot de passe
 
@@ -86,5 +87,6 @@ Autres / TODO
 -------------
 
  - Penser à créer les redirections pour les pages HTML
+ - Trouver un moyen de convertir les contenus HTML en syntaxe wiki
  - Importer les anciens mots de passe hashés
 
