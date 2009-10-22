@@ -11,6 +11,7 @@ ROR = Sequel.mysql(cfg['rails'])
 
 load "lib/constants.rb"
 load "lib/users.rb"
+load "lib/sections.rb"
 load "lib/diaries.rb"
 load "lib/forums.rb"
 load "lib/posts.rb"

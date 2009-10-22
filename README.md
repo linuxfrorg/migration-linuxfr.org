@@ -72,6 +72,8 @@ En pratique
 
     $ cp config.yml{.sample,} && vim config.yml
 
+	$ ln -s /path/to/templeet templeet
+
     $ mysql -u root
     mysql> CREATE DATABASE linuxfr_templeet;
     mysql> use linuxfr_templeet;
