@@ -91,5 +91,5 @@ Autres / TODO
  - Penser à créer les redirections pour les pages HTML
  - Trouver un moyen de convertir les contenus HTML en syntaxe wiki
  - Importer les anciens mots de passe hashés
- - Importer les sections comme tags
+ - karma, news_moderated, comments, scores, lang
 
