@@ -68,10 +68,17 @@ Les tables :
 En pratique
 -----------
 
+Coté Rails :
+
+    $ rake db:drop
+	$ rake db:create
+	$ rake db:migrate
+	$ rake db:seed
+
+Dans ce répertoire :
+
     $ gem install stephencelis-dots sequel
-
     $ cp config.yml{.sample,} && vim config.yml
-
 	$ ln -s /path/to/templeet templeet
 
     $ mysql -u root
@@ -82,6 +89,8 @@ En pratique
 
     $ ./import.rb
 
+Coté Rails :
+
     $ rake friendly_id:make_slugs
 
 
@@ -91,5 +100,5 @@ Autres / TODO
  - Penser à créer les redirections pour les pages HTML
  - Trouver un moyen de convertir les contenus HTML en syntaxe wiki
  - Importer les anciens mots de passe hashés
- - karma, news_moderated, comments, scores, lang
+ - karma, news_moderated, scores, lang
 
