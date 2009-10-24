@@ -23,7 +23,8 @@ ROR.transaction do
   users.where('id != 1 AND status != 0').each do |user|
     $stdout.print '.' if user[:id] % 100 == 0
     name  = [user[:lname], user[:fname]].compact
-    name  = name.empty? ? user[:login] : name.join(' ')
+    name  = name.join(' ').strip
+    name  = name.empty? ? user[:login] : name
     state = user[:status].to_i == 2 ? "deleted" : "active"
     role  = state == "active" ? "moule" : "inactive"
     role  = "reviewer"  if user[:level].to_i & (2**17) > 0

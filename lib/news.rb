@@ -1,11 +1,12 @@
 ##
-# News & News_attachements && News_author -> News & Nodes
+# News & News_attachements & News_author & News_moderated -> News & Nodes
 #
 # Gotchas
 #   Les jointures sur les tables (surtout les LEFT JOINs)
 #   Certains attachements sont au format binaire
 #   7 dépêches ont 2 attachements
 #   34 dépêches ont le state 4 - à purger
+#   On peut avoir 0, 1 ou plusieurs utilisateurs qui ont modéré une dépêche
 #
 
 
@@ -32,12 +33,14 @@ LEFT JOIN news_attachements AS pj ON n.id = pj.news_id AND pj.id NOT IN (6, 8, 4
   TPL.fetch(sql) do |news|
     $stdout.print '.' if news[:id] % 100 == 0
     published = news[:state].to_i == 1
+    moderator_id = TPL[:news_moderated].filter(:news_id => news[:id]).get(:user_id)
     ROR[:news].insert(
       :id           => news[:id],
       :state        => (published ? 'published' : 'refused'),
       :title        => news[:title],
       :body         => news[:body],
       :second_part  => news[:second_part],
+      :moderator_id => moderator_id,
       :section_id   => news[:topic_id] || 'Pas de titre',
       :author_name  => news[:author_name],
       :author_email => news[:author_contact],

@@ -97,9 +97,8 @@ Coté Rails :
 Autres / TODO
 -------------
 
- - Penser à créer les redirections pour les pages HTML
  - Trouver un moyen de convertir les contenus HTML en syntaxe wiki
  - Importer les anciens mots de passe hashés
  - l'import des commentaires dépend d'un index sur node\_id
- - karma, news\_moderated, lang
+ - karma, lang
 
