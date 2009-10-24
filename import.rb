@@ -21,4 +21,6 @@ load "lib/polls.rb"
 load "lib/interviews.rb"
 load "lib/tags.rb"
 load "lib/comments.rb"
+load "lib/relevances.rb"
+load "lib/votes.rb"
 

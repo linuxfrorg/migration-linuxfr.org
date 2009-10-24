@@ -47,6 +47,7 @@ ROR.transaction do
     id      = comment[:id]
     restype = ResTypes[comment[:res_type]]
     node_id = ROR[:nodes].filter(:content_type => restype, :content_id => comment[:news_id]).get(:id)
+    next unless node_id
     state   = comment[:deleted] == 0 ? 'published' : 'deleted'
     to_self = answered_to_self(comment)
     path    = materialized_path(comment)

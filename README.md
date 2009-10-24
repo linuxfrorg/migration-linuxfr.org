@@ -21,7 +21,7 @@ Les tables :
  - X `board` : les messages dans les tribunes ont une durée de vie limitée, et ne seront pas importés.
  - X `board_denied` : il y a actuellement 19 interdictions de tribune. Amnistie.
  - O `comments` : attention aux contenus masqués par raison légale ou par choix de l'auteur
- - O `comments_scored_user` : les pertinents/inutiles sur les commentaires. Données de 2004 à 2009.
+ - O `comments_scored_user` : les pertinents/inutiles sur les commentaires
  - X `commentsnew` : table obsolète y compris pour l'ancienne version...
  - O `contents_scored` : les pertinents/inutiles sur les contenus
  - O `forums_data` : à importer dans `posts`
@@ -100,5 +100,6 @@ Autres / TODO
  - Penser à créer les redirections pour les pages HTML
  - Trouver un moyen de convertir les contenus HTML en syntaxe wiki
  - Importer les anciens mots de passe hashés
- - karma, news_moderated, scores, lang
+ - l'import des commentaires dépend d'un index sur node\_id
+ - karma, news\_moderated, lang
 
