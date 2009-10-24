@@ -42,7 +42,7 @@ end
 
 
 ROR.transaction do
-  comments = TPL[:comments].select(:id, :subject, :body, :timestamp, :news_id, :res_type, :deleted)
+  comments = TPL[:comments].select(:id, :subject, :body, :timestamp, :news_id, :res_type, :deleted, :score)
   comments.each do |comment|
     id      = comment[:id]
     restype = ResTypes[comment[:res_type]]
@@ -58,6 +58,7 @@ ROR.transaction do
       :state             => state,
       :title             => comment[:subject],
       :body              => comment[:body],
+      :score             => comment[:score],
       :answered_to_self  => to_self,
       :materialized_path => path,
       :created_at        => comment[:timestamp],
