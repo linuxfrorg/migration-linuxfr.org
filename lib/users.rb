@@ -19,7 +19,7 @@ ROR.transaction do
     :updated_at => "NOW()".lit
   )
 
-  users = TPL[:users].select(:id, :lname, :fname, :login, :email, :homesite, :jabber_id, :status, :created, :level)
+  users = TPL[:users].select(:id, :lname, :fname, :login, :email, :homesite, :jabber_id, :status, :created, :level, :passwd)
   users.where('id != 1 AND status != 0').each do |user|
     $stdout.print '.' if user[:id] % 100 == 0
     name  = [user[:lname], user[:fname]].compact
@@ -31,22 +31,23 @@ ROR.transaction do
     role  = "moderator" if user[:level].to_i & (2**21) > 0
     role  = "admin"     if user[:level].to_i & (2**22) > 0
     ROR[:users].insert(
-      :id         => user[:id],
-      :name       => name,
-      :homesite   => user[:homesite],
-      :jabber_id  => user[:jabber_id],
-      :role       => role,
-      :created_at => user[:created],
-      :updated_at => user[:created]
+      :id           => user[:id],
+      :name         => name,
+      :homesite     => user[:homesite],
+      :jabber_id    => user[:jabber_id],
+      :role         => role,
+      :created_at   => user[:created],
+      :updated_at   => user[:created]
     )
     ROR[:accounts].insert(
-      :id         => user[:id],
-      :user_id    => user[:id],
-      :login      => user[:login],
-      :email      => user[:email],
-      :state      => state,
-      :created_at => user[:created],
-      :updated_at => user[:created]
+      :id           => user[:id],
+      :user_id      => user[:id],
+      :login        => user[:login],
+      :email        => user[:email],
+      :state        => state,
+      :old_password => user[:passwd],
+      :created_at   => user[:created],
+      :updated_at   => user[:created]
     )
   end
 end

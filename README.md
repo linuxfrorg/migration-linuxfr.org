@@ -74,6 +74,8 @@ Coté Rails :
 	$ rake db:create
 	$ rake db:migrate
 	$ rake db:seed
+    $ mysql linuxfr_rails
+	mysql> ALTER TABLE comments ADD INDEX node_id(node_id);
 
 Dans ce répertoire :
 
@@ -98,7 +100,6 @@ Autres / TODO
 -------------
 
  - Trouver un moyen de convertir les contenus HTML en syntaxe wiki
- - Importer les anciens mots de passe hashés
  - l'import des commentaires dépend d'un index sur node\_id
  - karma, lang
 
