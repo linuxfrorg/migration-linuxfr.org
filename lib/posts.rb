@@ -21,8 +21,8 @@ ROR.transaction do
     ROR[:posts].insert(
       :id         => post[:id],
       :state      => 'published',
-      :title      => post[:subject],
-      :body       => post[:body],
+      :title      => post[:subject].strip,
+      :body       => wikify(post[:body]),
       :forum_id   => post[:group_id],
       :created_at => post[:timestamp],
       :updated_at => post[:timestamp]

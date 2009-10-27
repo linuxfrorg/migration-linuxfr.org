@@ -37,9 +37,9 @@ LEFT JOIN news_attachements AS pj ON n.id = pj.news_id AND pj.id NOT IN (6, 8, 4
     ROR[:news].insert(
       :id           => news[:id],
       :state        => (published ? 'published' : 'refused'),
-      :title        => news[:title],
-      :body         => news[:body],
-      :second_part  => news[:second_part],
+      :title        => news[:title].strip,
+      :body         => wikify(news[:body]),
+      :second_part  => wikify(news[:second_part]),
       :moderator_id => moderator_id,
       :section_id   => news[:topic_id] || 'Pas de titre',
       :author_name  => news[:author_name],

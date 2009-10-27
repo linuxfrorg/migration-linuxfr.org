@@ -24,7 +24,7 @@ ROR.transaction do
     ROR[:polls].insert(
       :id         => poll[:id],
       :state      => 'archived',
-      :title      => poll[:question],
+      :title      => poll[:question].strip,
       :created_at => poll[:timestamp],
       :updated_at => poll[:timestamp]
     )
@@ -43,7 +43,7 @@ ROR.transaction do
     TPL[:poll_answers].filter(:question_id => poll[:id]).each do |answer|
       ROR[:poll_answers].insert(
         :poll_id    => poll[:id],
-        :answer     => answer[:answer],
+        :answer     => answer[:answer].strip,
         :votes      => answer[:number],
         :position   => answer[:answer_nb]
       )

@@ -22,9 +22,9 @@ ROR.transaction do
     ROR[:diaries].insert(
       :id         => diary[:id],
       :state      => 'published',
-      :title      => diary[:subject],
+      :title      => diary[:subject].strip,
       :owner_id   => diary[:user_id],
-      :body       => diary[:body],
+      :body       => wikify(diary[:body]),
       :created_at => diary[:timestamp],
       :updated_at => diary[:timestamp]
     )

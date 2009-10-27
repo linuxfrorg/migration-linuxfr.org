@@ -32,7 +32,7 @@ ROR.transaction do
     role  = "admin"     if user[:level].to_i & (2**22) > 0
     ROR[:users].insert(
       :id           => user[:id],
-      :name         => name,
+      :name         => name.strip,
       :homesite     => user[:homesite],
       :jabber_id    => user[:jabber_id],
       :role         => role,
@@ -42,8 +42,8 @@ ROR.transaction do
     ROR[:accounts].insert(
       :id           => user[:id],
       :user_id      => user[:id],
-      :login        => user[:login],
-      :email        => user[:email],
+      :login        => user[:login].strip,
+      :email        => user[:email].strip,
       :state        => state,
       :old_password => user[:passwd],
       :created_at   => user[:created],

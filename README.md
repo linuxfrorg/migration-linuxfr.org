@@ -57,7 +57,7 @@ Les tables :
  - X `users_boxes` : ça n'existe plus sur le nouveau site
  - O `users_journal` : les journaux
  - X `users_journal_recent` : ça n'a l'air d'être qu'un extrait de `users_journal`
- - **?** `users_karma` : on n'a pas encore de karma sur le nouveau site
+ - O `users_karma` : on n'a pas encore de karma sur le nouveau site
  - **?** `users_karma_archive` : idem
  - X `users_lastseen` : la date de dernière visite d'un contenu `->` on purge
  - M `users_personnalboxes` : ça n'existe plus sur le nouveau site, mais il faudrait peut être fournir un moyen aux utilisateurs de récupérer ça
@@ -68,6 +68,16 @@ Les tables :
 En pratique
 -----------
 
+Dans un répertoire temporaire :
+
+    $ wget http://www.dwheeler.com/html2wikipedia/html2wikipedia-1.01.tar.gz
+	$ tar xzvf html2wikipedia-1.01.tar.gz
+	$ cd html2wikipedia-1.01
+	$ make
+	$ mkdir -p ~/bin
+	$ cp html2wikipedia ~/bin
+	$ export PATH="$HOME/bin:$PATH"
+
 Coté Rails :
 
     $ rake db:drop
@@ -76,10 +86,10 @@ Coté Rails :
 	$ rake db:seed
     $ mysql linuxfr_rails
 	mysql> ALTER TABLE comments ADD INDEX node_id(node_id);
+	mysql> ALTER TABLE nodes ADD INDEX content(content_type, content_id);
 
 Dans ce répertoire :
 
-    $ gem install stephencelis-dots sequel
     $ cp config.yml{.sample,} && vim config.yml
 	$ ln -s /path/to/templeet templeet
 
@@ -87,19 +97,11 @@ Dans ce répertoire :
     mysql> CREATE DATABASE linuxfr_templeet;
     mysql> use linuxfr_templeet;
     mysql> source linuxfr-daily.dump;
-    (attendre un bon moment)
+    (attendre un petit moment)
 
-    $ ./import.rb
+    $ time ./import.rb
 
 Coté Rails :
 
     $ rake friendly_id:make_slugs
-
-
-Autres / TODO
--------------
-
- - Trouver un moyen de convertir les contenus HTML en syntaxe wiki
- - l'import des commentaires dépend d'un index sur node\_id
- - karma, lang
 

@@ -21,8 +21,8 @@ ROR.transaction do
     ROR[:interviews].insert(
       :id         => interview[:id],
       :state      => 'published',
-      :title      => interview[:target],
-      :body       => interview[:description],
+      :title      => interview[:target].strip,
+      :body       => wikify(interview[:description]),
       :news_id    => interview[:news_id],
       :assigned_to_user_id => interview[:assignee],
       :created_at => interview[:timestamp],

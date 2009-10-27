@@ -10,7 +10,7 @@ ROR.transaction do
   TPL[:sections].select(:id, :section).each do |section|
     id = ROR[:tags].insert(
       :id             => section[:id],
-      :name           => section[:section],
+      :name           => section[:section].strip,
       :taggings_count => 0
     )
   end
