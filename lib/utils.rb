@@ -21,11 +21,18 @@ def wikify(str)
 
   str.gsub!(/<a href=["']([^']+)["']>(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/(`|'{2,})/, '£nowiki£\1£/nowiki£')
-  3.times do
-    str.gsub!(/<ul>(.+?)<\/ul>/m) { $1.gsub(/\s*<li>/, "\n* ") }
+  str.gsub!(/<ol>.+<\/ol>/m) do |s|
+    s.gsub(/\s*<ul>(.+?)<\/ul>/m) do
+      $1.gsub(/\s*<li>/, "\n * ")
+    end
   end
+  str.gsub!(/<ul>(.+)<\/ul>/m) do
+    $1.gsub(/\s*<ul>.+?<\/ul>/m) do |s|
+      s.gsub(/\s*<li>/, "\n * ").strip
+    end.gsub(/\s*<li>/, "\n* ")
+  end
+  str.gsub!(/^(\s+)([^*])/, '£spaces£\1£/spaces£\2')
   str.gsub!(/\s*<li>/i, "\n# ")
-  str.gsub!(/^(\s+)/, '£spaces£\1£/spaces£\2')
   str.gsub!(/<\/?(ol|ul|li|small|sup|a)>/i, "")
   str.gsub!(/<\/?(B|b|strong)>/, "'''")
   str.gsub!(/<\/?(I|i|em)>/, "''")
