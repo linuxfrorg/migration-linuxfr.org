@@ -7,6 +7,7 @@
 #   Les listes imbriquées avec mélange de <ul> et de <ol>
 #   Un paquet de liens imbriqués dans des liens (<a href=""><a href="">...</a></a>)
 #   Attention à l'ordre des regexps !
+#   Ça ne marche pas terrible pour les images
 #
 def wikify(str)
   return "" if str.nil?
@@ -40,17 +41,7 @@ def wikify(str)
   str.gsub!(/<pre>(.+?)<\/pre>/) {|s| s.gsub(/£(\/?)nowiki£/, '') }
   str.gsub!(/£(\/?)nowiki£/, '<\1nowiki>')
   str.gsub!(/<br\s*\/?>/i, "\n")
-  # TODO <img src="" />
-
-#   str.gsub!(/<\/?blockquote>/, "`")
-#   str.gsub!(/<\/?pre>/, "`")
-#   str.gsub!(/<\/?[su]>/, "")
-#   if str =~ /<\w+>/
-#     File.open('unwikified.txt', 'a+') do |f|
-#       f << str
-#       f << "\n------------------------------------------------------------------------------\n"
-#     end
-#   end
+  str.gsub!(/<img [^>]*?src="([^"]+)"[^>]*?>/i, '{{\1}}')
 
   str
 end
