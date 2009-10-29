@@ -22,9 +22,10 @@ def wikify(str)
   str.gsub!(/<a href=["']([^']+)["']>(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/(`|'{2,})/, '£nowiki£\1£/nowiki£')
   3.times do
-    str.gsub!(/<ul>(.+?)<\/ul>/) { $1.gsub(/\s*<li>/, "\n* ") }
+    str.gsub!(/<ul>(.+?)<\/ul>/m) { $1.gsub(/\s*<li>/, "\n* ") }
   end
   str.gsub!(/\s*<li>/i, "\n# ")
+  str.gsub!(/^(\s+)/, '£spaces£\1£/spaces£\2')
   str.gsub!(/<\/?(ol|ul|li|small|sup|a)>/i, "")
   str.gsub!(/<\/?(B|b|strong)>/, "'''")
   str.gsub!(/<\/?(I|i|em)>/, "''")
@@ -38,7 +39,10 @@ def wikify(str)
   str.gsub!(/<span style="text-decoration: underline">(.+?)<\/span>/, '<u>\1</u>')
   str.gsub!(/<acronym +title="([^"]+)">(.+?)<\/acronym>/, '\2 (\1)')
   str.gsub!(/<acronym>(.+?)<\/acronym>/, '\1')
-  str.gsub!(/<pre>(.+?)<\/pre>/) {|s| s.gsub(/£(\/?)nowiki£/, '') }
+  str.gsub!(/<pre>(.+?)<\/pre>/m) do |s|
+    s.gsub(/^£spaces£(\s+)£\/spaces£/, '\1').gsub(/£(\/?)nowiki£/, '')
+  end
+  str.gsub!(/^£spaces£\s+£\/spaces£/, '')
   str.gsub!(/£(\/?)nowiki£/, '<\1nowiki>')
   str.gsub!(/<br\s*\/?>/i, "\n")
   str.gsub!(/<img [^>]*?src="([^"]+)"[^>]*?>/i, '{{\1}}')
