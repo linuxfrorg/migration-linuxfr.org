@@ -5,6 +5,7 @@
 #   Les crochets dans les liens cassent la syntaxe wiki (cf la veille April)
 #   Certains tags HTML ne peuvent pas être générés depuis la syntaxe wiki
 #   Les listes imbriquées avec mélange de <ul> et de <ol>
+#   Un paquet de liens imbriqués dans des liens (<a href=""><a href="">...</a></a>)
 #   Attention à l'ordre des regexps !
 #
 def wikify(str)
@@ -12,13 +13,13 @@ def wikify(str)
 
   str.strip!
   str.gsub!(/<\/?p>/, "\n")
+  str.gsub!(/<a href="([^"]+)"><a href="[^"]+">(.+?)<\/a><\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/<a href="([^"]+)">(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/<a href="http:\/\/fr.wikipedia.org\/wiki\/([^"]+)" title="Définition Wikipédia">.+?<\/a>/, '[[\1]]')
   return str unless str =~ /<\w+>/
 
   str.gsub!(/<a href=["']([^']+)["']>(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/(`|'{2,})/, '£nowiki£\1£/nowiki£')
-  str.gsub!(/^(#|\*)/, ' $1')
   3.times do
     str.gsub!(/<ul>(.+?)<\/ul>/) { $1.gsub(/\s*<li>/, "\n* ") }
   end
@@ -38,12 +39,12 @@ def wikify(str)
   str.gsub!(/<acronym>(.+?)<\/acronym>/, '\1')
   str.gsub!(/<pre>(.+?)<\/pre>/) {|s| s.gsub(/£(\/?)nowiki£/, '') }
   str.gsub!(/£(\/?)nowiki£/, '<\1nowiki>')
+  str.gsub!(/<br\s*\/?>/i, "\n")
   # TODO <img src="" />
 
 #   str.gsub!(/<\/?blockquote>/, "`")
 #   str.gsub!(/<\/?pre>/, "`")
 #   str.gsub!(/<\/?[su]>/, "")
-#   str.gsub!(/<br\s*\/?>/i, "\n")
 #   if str =~ /<\w+>/
 #     File.open('unwikified.txt', 'a+') do |f|
 #       f << str
@@ -52,4 +53,18 @@ def wikify(str)
 #   end
 
   str
+end
+
+
+##
+# Renvoie le code à 2 lettres d'une lang identifiée par son id
+#
+#   lang(1)   # => 'fr'
+#
+def lang(id)
+  $langs ||= TPL[:lang].all.inject({}) do |h,l|
+    h[l[:id]] = l[:lang]
+    h
+  end
+  $langs[id]
 end
