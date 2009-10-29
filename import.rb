@@ -25,5 +25,3 @@ load "lib/comments.rb"
 load "lib/relevances.rb"
 load "lib/votes.rb"
 
-puts_wikify_stats
-

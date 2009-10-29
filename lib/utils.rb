@@ -1,39 +1,55 @@
-$w_total = 0
-$w_html2 = 0
-
 ##
-# Try to convert HTML to mediawiki syntax
+# Try to convert HTML to mediawiki syntax with regexps
 #
-# First, we try a simple convertion in Ruby.
-# If there is no more HTML tags, we use it.
-# Else, the html2wikipedia binary is used.
+# Gotchas
+#   Les crochets dans les liens cassent la syntaxe wiki (cf la veille April)
+#   Certains tags HTML ne peuvent pas être générés depuis la syntaxe wiki
+#   Les listes imbriquées avec mélange de <ul> et de <ol>
+#   Attention à l'ordre des regexps !
 #
-def wikify(html)
-  return "" if html.nil?
-  $w_total += 1
-  html.strip!
+def wikify(str)
+  return "" if str.nil?
 
-  # Ruby
-  str = html.dup
-  str.gsub!(/<a href="([^"]+)">([^<]+)<\/a>/, '[\1 \2]')
-  str.gsub!(/<a href="http:\/\/fr.wikipedia.org\/wiki\/([^"]+)" title="Définition Wikipédia">[^<]+<\/a>/, '[[\1]]')
+  str.strip!
+  str.gsub!(/<\/?p>/, "\n")
+  str.gsub!(/<a href="([^"]+)">(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
+  str.gsub!(/<a href="http:\/\/fr.wikipedia.org\/wiki\/([^"]+)" title="Définition Wikipédia">.+?<\/a>/, '[[\1]]')
   return str unless str =~ /<\w+>/
 
-  # html2wikipedia
-  $w_html2 +=1
-  html.gsub!(/<span style="text-decoration: line-through">([^<]+)<\/span>/, '<s>\1</s>')
-  html.gsub!(/<span style="text-decoration: underline">([^<]+)<\/span>/, '<u>\1</u>')
-  IO.popen("html2wikipedia", "w+") do |h2w|
-    h2w << "<html><body>" << html << "</body></html>"
-    h2w.close_write
-    str = h2w.read(nil).strip!
+  str.gsub!(/<a href=["']([^']+)["']>(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
+  str.gsub!(/(`|'{2,})/, '£nowiki£\1£/nowiki£')
+  str.gsub!(/^(#|\*)/, ' $1')
+  3.times do
+    str.gsub!(/<ul>(.+?)<\/ul>/) { $1.gsub(/\s*<li>/, "\n* ") }
   end
+  str.gsub!(/\s*<li>/i, "\n# ")
+  str.gsub!(/<\/?(ol|ul|li|small|sup|a)>/i, "")
+  str.gsub!(/<\/?(B|b|strong)>/, "'''")
+  str.gsub!(/<\/?(I|i|em)>/, "''")
+  str.gsub!(/<\/?tt>/, "`")
+  str.gsub!(/<(\/?)(cite|q)>/, '<\1blockquote>')
+  str.gsub!(/<(\/?)code>/, '<\1pre>')
+  str.gsub!(/<(\/?)strike>/, '<\1s>')
+  str.gsub!(/<hr\/?>/i, '----')
+  str.gsub!(/<\/?h(\d)>/i) { '=' * $1.to_i }
+  str.gsub!(/<span style="text-decoration: line-through">(.+?)<\/span>/, '<s>\1</s>')
+  str.gsub!(/<span style="text-decoration: underline">(.+?)<\/span>/, '<u>\1</u>')
+  str.gsub!(/<acronym +title="([^"]+)">(.+?)<\/acronym>/, '\2 (\1)')
+  str.gsub!(/<acronym>(.+?)<\/acronym>/, '\1')
+  str.gsub!(/<pre>(.+?)<\/pre>/) {|s| s.gsub(/£(\/?)nowiki£/, '') }
+  str.gsub!(/£(\/?)nowiki£/, '<\1nowiki>')
+  # TODO <img src="" />
+
+#   str.gsub!(/<\/?blockquote>/, "`")
+#   str.gsub!(/<\/?pre>/, "`")
+#   str.gsub!(/<\/?[su]>/, "")
+#   str.gsub!(/<br\s*\/?>/i, "\n")
+#   if str =~ /<\w+>/
+#     File.open('unwikified.txt', 'a+') do |f|
+#       f << str
+#       f << "\n------------------------------------------------------------------------------\n"
+#     end
+#   end
+
   str
-end
-
-
-def puts_wikify_stats
-  puts "Ruby  : #{$w_total - $w_html2}"
-  puts "html2 : #{$w_html2}"
-  puts "Total : #{$w_total}"
 end

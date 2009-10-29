@@ -35,7 +35,7 @@ Les tables :
  - O `news` : il faut bien entendu importer les dépêches. Acceptées/rejetées/etc.
  - O `news_attachements` : les secondes parties des dépêches
  - O `news_author` : les auteurs de dépêches (pas toujours authentifiés)
- - **?** `news_history` : est-ce utile d'importer les modifications sur les dépêches ? Légalement ça pourrait être utile...
+ - N `news_history` : one ne devrait pas avoir besoin de l'historique des dépêches. Au pire, on pourra toujours faire l'import plus tard.
  - O `news_moderated` : on importe seulement une modération par dépêche
  - O `news_urls` : les liens des dépêches
  - O `poll_answers` : les propositions de réponse aux sondages
@@ -67,16 +67,6 @@ Les tables :
 
 En pratique
 -----------
-
-Dans un répertoire temporaire :
-
-    $ wget http://www.dwheeler.com/html2wikipedia/html2wikipedia-1.01.tar.gz
-	$ tar xzvf html2wikipedia-1.01.tar.gz
-	$ cd html2wikipedia-1.01
-	$ make
-	$ mkdir -p ~/bin
-	$ cp html2wikipedia ~/bin
-	$ export PATH="$HOME/bin:$PATH"
 
 Coté Rails :
 
