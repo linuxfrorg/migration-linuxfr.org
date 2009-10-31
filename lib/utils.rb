@@ -13,7 +13,7 @@ def wikify(str)
   return "" if str.nil?
 
   str.strip!
-  str.gsub!(/<\/?p>/, "\n")
+  str.gsub!(/<\/?p>/i, "\n")
   str.gsub!(/<a href="([^"]+)"><a href="[^"]+">(.+?)<\/a><\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/<a href="([^"]+)">(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/<a href="http:\/\/fr.wikipedia.org\/wiki\/([^"]+)" title="Définition Wikipédia">.+?<\/a>/, '[[\1]]')
@@ -21,38 +21,40 @@ def wikify(str)
 
   str.gsub!(/<a href=["']([^']+)["']>(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/(`|'{2,})/, '£nowiki£\1£/nowiki£')
-  str.gsub!(/<ol>.+<\/ol>/m) do |s|
-    s.gsub(/\s*<ul>(.+?)<\/ul>/m) do
-      $1.gsub(/\s*<li>/, "\n * ")
+  str.gsub!(/<ol>.+<\/ol>/im) do |s|
+    s.gsub(/\s*<ul>(.+?)<\/ul>/im) do
+      $1.gsub(/\s*<li>/i, "\n * ")
     end
   end
-  str.gsub!(/<ul>(.+)<\/ul>/m) do
-    $1.gsub(/\s*<ul>.+?<\/ul>/m) do |s|
-      s.gsub(/\s*<li>/, "\n * ").strip
-    end.gsub(/\s*<li>/, "\n* ")
+  str.gsub!(/<ul>(.+)<\/ul>/im) do
+    $1.gsub(/\s*<ul>.+?<\/ul>/im) do |s|
+      s.gsub(/\s*<li>/i, "\n * ").strip
+    end.gsub(/\s*<li>/i, "\n* ")
   end
   str.gsub!(/^(\s+)([^*])/, '£spaces£\1£/spaces£\2')
   str.gsub!(/\s*<li>/i, "\n# ")
   str.gsub!(/<\/?(ol|ul|li|small|sup|a)>/i, "")
-  str.gsub!(/<\/?(B|b|strong)>/, "'''")
-  str.gsub!(/<\/?(I|i|em)>/, "''")
-  str.gsub!(/<\/?tt>/, "`")
-  str.gsub!(/<(\/?)(cite|q)>/, '<\1blockquote>')
-  str.gsub!(/<(\/?)code>/, '<\1pre>')
-  str.gsub!(/<(\/?)strike>/, '<\1s>')
+  str.gsub!(/<\/?(b|strong)>/i, "'''")
+  str.gsub!(/<\/?(i|em)>/i, "''")
+  str.gsub!(/<\/?tt>/i, "`")
+  str.gsub!(/<(\/?)(cite|q)>/i, '<\1blockquote>')
+  str.gsub!(/<(\/?)code>/i, '<\1pre>')
+  str.gsub!(/<(\/?)strike>/i, '<\1s>')
   str.gsub!(/<hr\/?>/i, '----')
   str.gsub!(/<\/?h(\d)>/i) { '=' * $1.to_i }
   str.gsub!(/<span style="text-decoration: line-through">(.+?)<\/span>/, '<s>\1</s>')
   str.gsub!(/<span style="text-decoration: underline">(.+?)<\/span>/, '<u>\1</u>')
-  str.gsub!(/<acronym +title="([^"]+)">(.+?)<\/acronym>/, '\2 (\1)')
-  str.gsub!(/<acronym>(.+?)<\/acronym>/, '\1')
-  str.gsub!(/<pre>(.+?)<\/pre>/m) do |s|
+  str.gsub!(/<acronym +title="([^"]+)">(.+?)<\/acronym>/i, '\2 (\1)')
+  str.gsub!(/<acronym>(.+?)<\/acronym>/i, '\1')
+  str.gsub!(/<pre>(.+?)<\/pre>/im) do |s|
     s.gsub(/^£spaces£(\s+)£\/spaces£/, '\1').gsub(/£(\/?)nowiki£/, '')
   end
   str.gsub!(/^£spaces£\s+£\/spaces£/, '')
   str.gsub!(/£(\/?)nowiki£/, '<\1nowiki>')
-  str.gsub!(/<br\s*\/?>/i, "\n")
+  str.gsub!(/<br\s*\/?>/i, "£br£\n")
   str.gsub!(/<img [^>]*?src="([^"]+)"[^>]*?>/i, '{{\1}}')
+  str.gsub!(/<a name=[^>]*>/i, '')
+  str.gsub!(/<a href=[^>]*>/i, '')
 
   str
 end
