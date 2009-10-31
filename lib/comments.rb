@@ -9,7 +9,7 @@
 
 
 puts "\n____( Comments )________________________________________________________________\n"
-puts "/!\\ Attention, ça va être long, très long /!\\"
+puts "/!\\ Attention, ça va être long /!\\"
 
 $parent_id = Array.new(1_200_000)
 $user_id   = Array.new(1_200_000)

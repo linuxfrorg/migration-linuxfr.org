@@ -17,7 +17,7 @@ def wikify(str)
   str.gsub!(/<a href="([^"]+)"><a href="[^"]+">(.+?)<\/a><\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/<a href="([^"]+)">(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/<a href="http:\/\/fr.wikipedia.org\/wiki\/([^"]+)" title="Définition Wikipédia">.+?<\/a>/, '[[\1]]')
-  return str unless str =~ /<\w+>/
+  return str unless str =~ /<[^>]+>/
 
   str.gsub!(/<a href=["']([^']+)["']>(.+?)<\/a>/i) { "[#{$1} #{$2.tr('[]', '()')}]" }
   str.gsub!(/(`|'{2,})/, '£nowiki£\1£/nowiki£')
