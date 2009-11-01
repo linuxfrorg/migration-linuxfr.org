@@ -32,7 +32,6 @@ ROR.transaction do
       :content_id   => poll[:id],
       :content_type => 'Poll',
       :score        => poll[:score],
-      :interest     => poll[:interest],
       :user_id      => poll[:user_id],
       :public       => true,
       :created_at   => poll[:timestamp],

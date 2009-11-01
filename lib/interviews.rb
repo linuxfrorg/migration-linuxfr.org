@@ -32,7 +32,6 @@ ROR.transaction do
       :content_id   => interview[:id],
       :content_type => 'Interview',
       :score        => interview[:score],
-      :interest     => interview[:interest],
       :user_id      => interview[:user_id],
       :public       => true,
       :created_at   => interview[:timestamp],

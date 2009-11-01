@@ -31,7 +31,6 @@ ROR.transaction do
       :content_id   => post[:id],
       :content_type => 'Post',
       :score        => post[:score],
-      :interest     => post[:interest],
       :user_id      => post[:user_id],
       :public       => true,
       :created_at   => post[:timestamp],

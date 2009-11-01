@@ -32,7 +32,6 @@ ROR.transaction do
       :content_id   => diary[:id],
       :content_type => 'Diary',
       :score        => diary[:score],
-      :interest     => diary[:interest],
       :user_id      => diary[:user_id],
       :public       => true,
       :created_at   => diary[:timestamp],
