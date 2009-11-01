@@ -51,7 +51,7 @@ def wikify(str)
   end
   str.gsub!(/^£spaces£\s+£\/spaces£/, '')
   str.gsub!(/£(\/?)nowiki£/, '<\1nowiki>')
-  str.gsub!(/<br\s*\/?>/i, "£br£\n")
+  str.gsub!(/<br\s*\/?>/i, "[BR]\n")
   str.gsub!(/<img [^>]*?src="([^"]+)"[^>]*?>/i, '{{\1}}')
   str.gsub!(/<a name=[^>]*>/i, '')
   str.gsub!(/<a href=[^>]*>/i, '')
