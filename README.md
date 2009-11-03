@@ -70,28 +70,24 @@ En pratique
 
 Coté Rails :
 
-    $ rake db:drop
-	$ rake db:create
-	$ rake db:migrate
-	$ rake db:seed
-    $ mysql linuxfr_rails
-	mysql> ALTER TABLE comments ADD INDEX node_id(node_id);
-	mysql> ALTER TABLE nodes ADD INDEX content(content_type, content_id);
+    $ rake db:drop db:create db:migrate db:seed
 
 Dans ce répertoire :
 
     $ cp config.yml{.sample,} && vim config.yml
-	$ ln -s /path/to/templeet templeet
+	$ ln -s /path/to/templeet/htdocs templeet
 
     $ mysql -u root
     mysql> CREATE DATABASE linuxfr_templeet;
-    mysql> use linuxfr_templeet;
-    mysql> source linuxfr-daily.dump;
+	$ zcat linuxfr-daily.dump.gz | mysql -u root linuxfr_templeet
     (attendre un petit moment)
 
     $ time ./import.rb
 
 Coté Rails :
 
-    $ rake friendly_id:make_slugs
+    $ for m in Diary Forum Interview News Poll Post Section User
+      do
+        rake friendly_id:make_slugs MODEL=$m
+      done
 
