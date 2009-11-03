@@ -18,18 +18,24 @@ ROR.transaction do
    WHERE res_type = ?
   EOS
   TPL.fetch(sql, ResTypes.index('diary')) do |diary|
-    $stdout.print '.' if diary[:id] % 100 == 0
+    id    = diary[:id]
+    title = diary[:subject].strip
+    title = id.to_s if title == ''
+    title = "(#{id}) #{title}" if id IN [4, 303, 1074, 1302, 1825, 3611, 4384, 6232, 9055, 10357, 18512, 24755]
+    body  = wikify(diary[:body])
+    body  = title if body == ''
+    $stdout.print '.' if id % 100 == 0
     ROR[:diaries].insert(
-      :id         => diary[:id],
+      :id         => id,
       :state      => 'published',
-      :title      => diary[:subject].strip,
+      :title      => title,
       :owner_id   => diary[:user_id],
-      :body       => wikify(diary[:body]),
+      :body       => body,
       :created_at => diary[:timestamp],
       :updated_at => diary[:timestamp]
     )
     ROR[:nodes].insert(
-      :content_id   => diary[:id],
+      :content_id   => id,
       :content_type => 'Diary',
       :score        => diary[:score],
       :user_id      => diary[:user_id],

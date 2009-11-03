@@ -18,6 +18,16 @@ ROR.transaction do
     :created_at => "NOW()".lit,
     :updated_at => "NOW()".lit
   )
+  ROR[:accounts].insert(
+    :id           => 1,
+    :user_id      => 1,
+    :login        => 'Anonyme',
+    :email        => 'anonyme@linuxfr.org',
+    :state        => 'deleted',
+    :old_password => nil,
+    :created_at   => 'NOW()'.lit,
+    :updated_at   => 'NOW()'.lit
+  )
 
   users = TPL[:users].select(:id, :lname, :fname, :login, :email, :homesite, :jabber_id, :status, :created, :level, :passwd)
   users.where('id != 1 AND status != 0').each do |user|
