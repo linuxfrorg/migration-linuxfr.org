@@ -74,6 +74,7 @@ Coté Rails :
 
 Dans ce répertoire :
 
+    $ gem install sequel
     $ cp config.yml{.sample,} && vim config.yml
 	$ ln -s /path/to/templeet/htdocs templeet
 
