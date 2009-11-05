@@ -8,9 +8,11 @@ puts "\n____( Tags )____________________________________________________________
 
 ROR.transaction do
   TPL[:sections].select(:id, :section).each do |section|
+    name = section[:section].strip.downcase
+    name.tr!(' ', '_')
     id = ROR[:tags].insert(
       :id             => section[:id],
-      :name           => section[:section].strip,
+      :name           => name,
       :taggings_count => 0
     )
   end
