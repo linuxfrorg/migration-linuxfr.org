@@ -87,6 +87,7 @@ Dans ce répertoire :
 
 Coté Rails :
 
+    $ rake ts:index
     $ for m in Diary Forum Interview News Poll Post Section User
       do
         rake friendly_id:make_slugs MODEL=$m
