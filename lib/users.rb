@@ -31,7 +31,7 @@ ROR.transaction do
 
   users = TPL[:users].select(:id, :lname, :fname, :login, :email, :homesite, :jabber_id, :status, :created, :level, :passwd)
   users.where('id != 1 AND status != 0').each do |user|
-    $stdout.print '.' if user[:id] % 100 == 0
+    id    = user[:id]
     name  = [user[:lname], user[:fname]].compact
     name  = name.join(' ').strip
     name  = name.empty? ? user[:login] : name
@@ -40,8 +40,10 @@ ROR.transaction do
     role  = "reviewer"  if user[:level].to_i & (2**17) > 0
     role  = "moderator" if user[:level].to_i & (2**21) > 0
     role  = "admin"     if user[:level].to_i & (2**22) > 0
+    karma = TPL[:users_karma].filter(:user_id => id).get(:experience) || 20
+    $stdout.print '.' if id % 100 == 0
     ROR[:users].insert(
-      :id           => user[:id],
+      :id           => id,
       :name         => name.strip,
       :homesite     => user[:homesite],
       :jabber_id    => user[:jabber_id],
@@ -50,12 +52,14 @@ ROR.transaction do
       :updated_at   => user[:created]
     )
     ROR[:accounts].insert(
-      :id           => user[:id],
-      :user_id      => user[:id],
+      :id           => id,
+      :user_id      => id,
       :login        => user[:login].strip,
       :email        => user[:email].strip,
       :state        => state,
       :old_password => user[:passwd],
+      :karma        => karma,
+      :nb_votes     => 5,
       :created_at   => user[:created],
       :updated_at   => user[:created]
     )

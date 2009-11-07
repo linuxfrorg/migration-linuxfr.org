@@ -58,7 +58,7 @@ Les tables :
  - O `users_journal` : les journaux
  - X `users_journal_recent` : ça n'a l'air d'être qu'un extrait de `users_journal`
  - O `users_karma` : on n'a pas encore de karma sur le nouveau site
- - **?** `users_karma_archive` : idem
+ - N `users_karma_archive` : idem
  - X `users_lastseen` : la date de dernière visite d'un contenu `->` on purge
  - M `users_personnalboxes` : ça n'existe plus sur le nouveau site, mais il faudrait peut être fournir un moyen aux utilisateurs de récupérer ça
  - X `users_rdf`
