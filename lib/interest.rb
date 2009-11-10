@@ -17,7 +17,7 @@ ROR.transaction do
     'Interview' => 10,
   }.each do |type, coeff|
     ds = ROR[:nodes].filter(:content_type => type)
-    ds.update(:interest => "score * #{coeff} + UNIX_TIMESTAMP(created_at)".lit)
+    ds.update(:interest => "score * #{coeff} + UNIX_TIMESTAMP(created_at) / 1000".lit)
   end
 end
 
