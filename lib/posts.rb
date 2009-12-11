@@ -27,7 +27,8 @@ ROR.transaction do
       :id         => id,
       :state      => 'published',
       :title      => title,
-      :body       => body,
+      :body       => post[:body],
+      :wiki_body  => body,
       :forum_id   => post[:group_id],
       :created_at => post[:timestamp],
       :updated_at => post[:timestamp]

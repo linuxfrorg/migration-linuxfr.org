@@ -21,7 +21,7 @@ ROR.transaction do
     id    = diary[:id]
     title = diary[:subject].strip
     title = id.to_s if title == ''
-    title = "(#{id}) #{title}" if id IN [4, 303, 1074, 1302, 1825, 3611, 4384, 6232, 9055, 10357, 18512, 24755]
+    title = "(#{id}) #{title}" if [4, 303, 1074, 1302, 1825, 3611, 4384, 6232, 9055, 10357, 18512, 24755].include?(id)
     body  = wikify(diary[:body])
     body  = title if body == ''
     $stdout.print '.' if id % 100 == 0
@@ -30,7 +30,8 @@ ROR.transaction do
       :state      => 'published',
       :title      => title,
       :owner_id   => diary[:user_id],
-      :body       => body,
+      :body       => diary[:body],
+      :wiki_body  => body,
       :created_at => diary[:timestamp],
       :updated_at => diary[:timestamp]
     )
