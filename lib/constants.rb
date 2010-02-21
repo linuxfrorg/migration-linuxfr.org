@@ -6,6 +6,5 @@ ResTypes = [
   'post',       # 4. forums
   'diary',      # 5. journal
   'poll',       # 6.
-  'tracker',    # 7.
-  'interview'   # 8. interviews
+  'tracker'     # 7.
 ]

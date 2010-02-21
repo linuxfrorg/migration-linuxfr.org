@@ -11,7 +11,6 @@ Le schéma Templeet
 ------------------
 
 Légende :
- - **?** : je ne sais pas encore
  - X : ces données ne seront pas importées car elles sont considérées comme inutiles
  - O : ces données seront importées
  - M : les données ne seront pas importées, mais elles seront envoyées par mail
@@ -27,11 +26,11 @@ Les tables :
  - O `forums_data` : à importer dans `posts`
  - O `forums_group` : à importer dans `forums`
  - O `interest` : à importer dans `nodes`
- - O `interviews` : à importer dans `interviews`
+ - X `interviews` : à importer dans `interviews`
  - O `lang` : liste des drapeaux pour les langues des documents pointés par les URL
  - X `locks`
  - M `messages` : pour le moment, nous n'avons pas de messagerie, et de toute façon, les messages ont une durée de vie limitée. Prévoir de les envoyer par courriel aux concernés avant suppression.
- - **?** `moderator_last` : à importer pour les stats (savoir qui a été modérateur dans le passé) ?
+ - X `moderator_last` : stats sur les modérateurs
  - O `news` : il faut bien entendu importer les dépêches. Acceptées/rejetées/etc.
  - O `news_attachements` : les secondes parties des dépêches
  - O `news_author` : les auteurs de dépêches (pas toujours authentifiés)
@@ -57,8 +56,8 @@ Les tables :
  - X `users_boxes` : ça n'existe plus sur le nouveau site
  - O `users_journal` : les journaux
  - X `users_journal_recent` : ça n'a l'air d'être qu'un extrait de `users_journal`
- - O `users_karma` : on n'a pas encore de karma sur le nouveau site
- - N `users_karma_archive` : idem
+ - O `users_karma` : le karma actuel des utilisateurs
+ - X `users_karma_archive` : idem
  - X `users_lastseen` : la date de dernière visite d'un contenu `->` on purge
  - M `users_personnalboxes` : ça n'existe plus sur le nouveau site, mais il faudrait peut être fournir un moyen aux utilisateurs de récupérer ça
  - X `users_rdf`
