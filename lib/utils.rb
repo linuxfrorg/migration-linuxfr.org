@@ -12,7 +12,7 @@
 def wikify(str)
   return "" if str.nil?
 
-  str.strip!
+  str = str.strip
   str.gsub!(/<\/?p>/i, "\n")
   str.gsub!(/<a href="([^"]+)"><a href="[^"]+">(.+?)<\/a><\/a>/i) { "[#{$2.tr('[]', '()')}](#{$1})" }
   str.gsub!(/<a href="([^"]+)"><img src="([^"]+)" alt="([^"]+)"[^>]*><\/a>/i, '[![\3](\2)](\1)')
@@ -24,17 +24,17 @@ def wikify(str)
   str.gsub!(/<a href=["']([^']+)["']>(.+?)<\/a>/i) { "[#{$2.tr('[]', '()')}](#{$1})" }
   str.gsub!(/(`|_|\\|\[|\]|\.|#)/, '\\1')
   str.gsub!(/<ol>.+<\/ol>/im) do |s|
-    s.gsub(/\s*<ul>(.+?)<\/ul>/im) do
+    "\n\n" + s.gsub(/\s*<ul>(.+?)<\/ul>/im) do
       $1.gsub(/\s*<li>/i, "\n * ")
     end
   end
   str.gsub!(/<ul>(.+)<\/ul>/im) do
-    $1.gsub(/\s*<ul>.+?<\/ul>/im) do |s|
+    "\n\n" + $1.gsub(/\s*<ul>.+?<\/ul>/im) do |s|
       s.gsub(/\s*<li>/i, "\n * ").strip
     end.gsub(/\s*<li>/i, "\n* ")
   end
-  str.gsub!(/^(\s+)([^*])/, '£spaces£\1£/spaces£\2')
   str.gsub!(/\s*<li>/i, "\n1. ")
+  str.gsub!(/^([ \t]+)/, '£spaces£\1£/spaces£')
   str.gsub!(/<\/?(ol|ul|li|small|sup|a)>/i, "")
   str.gsub!(/<\/?(b|strong)>/i, "**")
   str.gsub!(/<\/?(i|em)>/i, "_")
