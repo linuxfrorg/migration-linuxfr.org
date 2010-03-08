@@ -32,7 +32,7 @@ ROR.transaction do
   users = TPL[:users].select(:id, :lname, :fname, :login, :email, :homesite, :jabber_id, :status, :created, :level, :passwd)
   users.where('id != 1 AND status != 0').each do |user|
     id    = user[:id]
-    name  = [user[:lname], user[:fname]].compact
+    name  = [user[:fname], user[:lname]].compact
     name  = name.join(' ').strip
     name  = name.empty? ? user[:login] : name
     state = user[:status].to_i == 2 ? "deleted" : "active"
