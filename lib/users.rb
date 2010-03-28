@@ -41,6 +41,8 @@ ROR.transaction do
     role  = "moderator" if user[:level].to_i & (2**21) > 0
     role  = "admin"     if user[:level].to_i & (2**22) > 0
     karma = TPL[:users_karma].filter(:user_id => id).get(:experience) || 20
+    email = user[:email].strip
+    email = "user-#{id}@dlfp.org" if email.nil? || email == ""
     $stdout.print '.' if id % 100 == 0
     ROR[:users].insert(
       :id           => id,
@@ -55,7 +57,7 @@ ROR.transaction do
       :id           => id,
       :user_id      => id,
       :login        => user[:login].strip,
-      :email        => user[:email].strip,
+      :email        => email,
       :state        => state,
       :old_password => user[:passwd],
       :karma        => karma,
