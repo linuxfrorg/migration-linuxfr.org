@@ -32,13 +32,12 @@ ROR.transaction do
       :role         => role,
       :created_at   => user[:created],
       :updated_at   => user[:created]
-    )
+    ) if state != "deleted"
     ROR[:accounts].insert(
       :id           => id,
       :user_id      => id,
       :login        => user[:login].strip,
       :email        => email,
-      :state        => state,
       :old_password => user[:passwd],
       :karma        => karma,
       :nb_votes     => 5,
