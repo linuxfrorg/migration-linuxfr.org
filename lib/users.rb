@@ -41,6 +41,7 @@ ROR.transaction do
       :old_password => user[:passwd],
       :karma        => karma,
       :nb_votes     => 5,
+      :confirmed_at => (state != "deleted") ? user[:created] : nil
       :created_at   => user[:created],
       :updated_at   => user[:created]
     )
