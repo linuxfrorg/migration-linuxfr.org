@@ -29,6 +29,7 @@ ROR.transaction do
       :title      => title,
       :body       => post[:body],
       :wiki_body  => body,
+      :user_id    => post[:user_id],
       :forum_id   => post[:group_id],
       :created_at => post[:timestamp],
       :updated_at => post[:timestamp]
