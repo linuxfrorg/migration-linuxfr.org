@@ -71,7 +71,7 @@ En pratique
 
 Coté Rails :
 
-    $ rake db:drop db:create db:migrate db:seed
+    $ rake db:drop db:setup
 
 Dans ce répertoire :
 
