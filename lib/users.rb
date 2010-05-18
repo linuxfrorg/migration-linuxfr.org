@@ -11,6 +11,7 @@ puts "\n____( Users )___________________________________________________________
 ROR.transaction do
   users = TPL[:users].select(:id, :lname, :fname, :login, :email, :homesite, :jabber_id, :status, :created, :level, :passwd)
   users.where('id != 1 AND status != 0').each do |user|
+    next if user[:login] == "______"
     id    = user[:id]
     name  = [user[:fname], user[:lname]].compact
     name  = name.join(' ').strip

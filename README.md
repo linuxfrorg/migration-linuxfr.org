@@ -83,7 +83,7 @@ Dans ce répertoire :
     mysql> CREATE DATABASE linuxfr_templeet;
     $ gunzip linuxfr-daily.dump.gz
     $ sed -i -e 's/^) ENGINE=\(.*\) DEFAULT CHARSET=latin1/\) ENGINE=\1 DEFAULT CHARSET=utf8/' linuxfr-daily.dump
-    $ mysql -u root linuxfr_templeet < linuxfr-daily.dump
+    $ mysql -p -u linuxfr templeet < linuxfr-daily.dump
     (attendre un petit moment)
 
     $ time ./import.rb

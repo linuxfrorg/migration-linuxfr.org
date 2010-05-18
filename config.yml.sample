@@ -1,7 +1,8 @@
 templeet:
-  database: linuxfr_templeet
+  database: templeet
   username: linuxfr
   password: change-me
+  encoding: latin1
 
 rails:
   database: linuxfr_production

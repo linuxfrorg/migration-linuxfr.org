@@ -7,6 +7,7 @@ $stdout.sync = true
 
 cfg = YAML.load_file('config.yml')
 TPL = Sequel.mysql(cfg['templeet'])
+TPL.run('set names latin1')
 ROR = Sequel.mysql(cfg['rails'])
 
 load "lib/constants.rb"
