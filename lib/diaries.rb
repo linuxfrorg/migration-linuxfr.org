@@ -40,7 +40,7 @@ ROR.transaction do
       :content_type => 'Diary',
       :score        => diary[:score],
       :user_id      => diary[:user_id],
-      :public       => true,
+      :public       => 1,
       :created_at   => diary[:timestamp],
       :updated_at   => diary[:timestamp]
     )

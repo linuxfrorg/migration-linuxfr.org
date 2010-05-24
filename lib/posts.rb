@@ -39,7 +39,7 @@ ROR.transaction do
       :content_type => 'Post',
       :score        => post[:score],
       :user_id      => post[:user_id],
-      :public       => true,
+      :public       => 1,
       :created_at   => post[:timestamp],
       :updated_at   => post[:timestamp]
     )

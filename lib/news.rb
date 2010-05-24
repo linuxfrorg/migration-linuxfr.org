@@ -52,7 +52,7 @@ LEFT JOIN news_attachements AS pj ON n.id = pj.news_id AND pj.id NOT IN (6, 8, 4
       :content_type => 'News',
       :score        => news[:score] || 0,
       :user_id      => news[:user_id],
-      :public       => (published ? 0 : 1),
+      :public       => (published ? 1 : 0),
       :created_at   => news[:timestamp],
       :updated_at   => news[:timestamp]
     )
