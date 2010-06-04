@@ -64,6 +64,16 @@ end
 
 
 ##
+# Rajoute des <br/> en fin de ligne comme le nl2br de templeet
+#
+#   nl2br("foo\nbar")   # => "foo<br/>\nbar"
+#
+def nl2br(txt)
+  txt.gsub(/\n/, "<br/>\n").gsub(/(<\/?)acronym/, '\1abbr')
+end
+
+
+##
 # Renvoie le code à 2 lettres d'une lang identifiée par son id
 #
 #   lang(1)   # => 'fr'
