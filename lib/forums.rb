@@ -11,7 +11,7 @@ ROR.transaction do
   position = 0
   forums = TPL[:forums_group].order('parent_id'.lit).where('parent_id != 0')
   forums.each do |forum|
-    state = forum[:is_post].to_i == 0 ? 'active' : 'archive'
+    state = 'active'
     parent_name = TPL[:forums_group].where('id = ?', forum[:parent_id]).get(:name)
     name = [parent_name, forum[:name]].join('.')
     ROR[:forums].insert(
