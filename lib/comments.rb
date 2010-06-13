@@ -40,13 +40,26 @@ def materialized_path(comment)
   path
 end
 
+def NodeId
+  def initialize
+    @cache = {}
+  end
+
+  def for(type, id)
+    key = "#{type}/#{id}"
+    return @cache[key] if @cache.has_key?(key)
+    @cache[key] = ROR[:nodes].filter(:content_type => type, :content_id => id).get(:id)
+  end
+end
+
 
 ROR.transaction do
+  nid = NodeId.new
   comments = TPL[:comments].select(:id, :subject, :body, :timestamp, :news_id, :res_type, :deleted, :score)
   comments.each do |comment|
     id      = comment[:id]
     restype = ResTypes[comment[:res_type]]
-    node_id = ROR[:nodes].filter(:content_type => restype, :content_id => comment[:news_id]).get(:id)
+    node_id = nid.for(restype, comment[:news_id])
     next unless node_id
     state   = comment[:deleted] == 0 ? 'published' : 'deleted'
     to_self = answered_to_self(comment)

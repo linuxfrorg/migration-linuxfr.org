@@ -16,7 +16,6 @@ ROR.transaction do
       :title      => link[:name].strip,
       :url        => link[:url].strip,
       :lang       => lang(link[:lang_id]),
-      :nb_clicks  => link[:hits],
       :created_at => 'NOW()'.lit,
       :updated_at => 'NOW()'.lit
     )
