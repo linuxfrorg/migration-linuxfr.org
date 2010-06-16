@@ -11,12 +11,8 @@ puts "\n____( Relevances )______________________________________________________
 ROR.transaction do
   relevances = TPL[:comments_scored_user].filter('timestamp < ?', Time.now - (31 * 24 * 60 * 60))
   relevances.each do |relevance|
-    ROR[:relevances].insert(
-      :user_id    => relevance[:user_id],
-      :comment_id => relevance[:comments_id],
-      :vote       => relevance[:score] == 1,
-      :created_at => relevance[:timestamp]
-    )
+    RED.set("comments/#{relevance[:user_id]}/votes/#{relevance[:user_id]}", relevance[:score])
+    RED.expire("comments/#{relevance[:user_id]}/votes/#{relevance[:user_id]}", 7776000)
   end
 end
 

@@ -24,7 +24,6 @@ ROR.transaction do
     karma = TPL[:users_karma].filter(:user_id => id).get(:experience) || 20
     email = user[:email].strip
     email = "user-#{id}@dlfp.org" if email.nil? || email == ""
-    $stdout.print '.' if id % 100 == 0
     ROR[:users].insert(
       :id           => id,
       :name         => name.strip,
@@ -33,7 +32,7 @@ ROR.transaction do
       :role         => role,
       :created_at   => user[:created],
       :updated_at   => user[:created]
-    ) if state != "deleted"
+    )
     ROR[:accounts].insert(
       :id           => id,
       :user_id      => id,
@@ -46,6 +45,7 @@ ROR.transaction do
       :created_at   => user[:created],
       :updated_at   => user[:created]
     )
+    $stdout.print '.' if id % 100 == 0
   end
 end
 

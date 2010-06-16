@@ -79,6 +79,7 @@ ROR.transaction do
       :updated_at        => comment[:timestamp]
     )
     $stdout.print '.' if id % 1000 == 0
+    nid = NodeId.new  if id % 30000 == 0
   end
 end
 

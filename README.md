@@ -75,7 +75,7 @@ Coté Rails :
 
 Dans ce répertoire :
 
-    $ gem install sequel
+    $ gem install sequel redis
     $ cp config.yml{.sample,} && vim config.yml
     $ ln -s /path/to/templeet/htdocs templeet
 

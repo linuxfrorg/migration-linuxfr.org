@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 
+require 'rubygems'
 require 'yaml'
 require 'sequel'
+require 'redis'
 
 $stdout.sync = true
 
@@ -9,6 +11,7 @@ cfg = YAML.load_file('config.yml')
 TPL = Sequel.mysql(cfg['templeet'])
 TPL.run('set names latin1')
 ROR = Sequel.mysql(cfg['rails'])
+RED = Redis.new
 
 load "lib/constants.rb"
 load "lib/utils.rb"

@@ -13,12 +13,8 @@ ROR.transaction do
     restype = ResTypes[vote[:res_type]]
     node_id = ROR[:nodes].filter(:content_type => restype, :content_id => vote[:res_id]).get(:id)
     next unless node_id
-    ROR[:votes].insert(
-      :user_id    => vote[:user_id],
-      :node_id    => node_id,
-      :vote       => vote[:score] == 1,
-      :created_at => vote[:timestamp]
-    )
+    RED.set("nodes/#{node_id}/votes/#{vote[:user_id]}", vote[:score])
+    RED.expire("nodes/#{node_id}/votes/#{vote[:user_id]}", 7776000)
   end
 end
 
