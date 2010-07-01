@@ -75,7 +75,7 @@ Coté Rails :
 
 Dans ce répertoire :
 
-    $ gem install sequel redis
+    $ gem install sequel redis nokogiri
     $ cp config.yml{.sample,} && vim config.yml
     $ ln -s /path/to/templeet/htdocs templeet
 

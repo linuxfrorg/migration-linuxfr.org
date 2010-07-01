@@ -26,14 +26,15 @@ ROR.transaction do
     body  = title if body == ''
     $stdout.print '.' if id % 100 == 0
     ROR[:diaries].insert(
-      :id         => id,
-      :state      => 'published',
-      :title      => title,
-      :owner_id   => diary[:user_id],
-      :body       => diary[:body],
-      :wiki_body  => body,
-      :created_at => diary[:timestamp],
-      :updated_at => diary[:timestamp]
+      :id             => id,
+      :state          => 'published',
+      :title          => title,
+      :owner_id       => diary[:user_id],
+      :body           => diary[:body],
+      :truncated_body => truncate_html(body)
+      :wiki_body      => body,
+      :created_at     => diary[:timestamp],
+      :updated_at     => diary[:timestamp]
     )
     ROR[:nodes].insert(
       :content_id   => id,

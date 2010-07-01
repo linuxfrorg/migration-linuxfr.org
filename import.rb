@@ -15,6 +15,7 @@ RED = Redis.new
 
 load "lib/constants.rb"
 load "lib/utils.rb"
+load "lib/truncate_html.rb"
 load "lib/users.rb"
 load "lib/sections.rb"
 load "lib/news.rb"

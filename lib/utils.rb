@@ -44,6 +44,7 @@ def wikify(str)
   str.gsub!(/<hr\/?>/i, '----')
   str.gsub!(/<h(\d)>/i)   { '#' * $1.to_i + ' ' }
   str.gsub!(/<\/h(\d)>/i) { ' ' + '#' * $1.to_i }
+  str.gsub!(/<acronym +title="Note des modérateurs">NdM<\/acronym>/i, "\nNdM")
   str.gsub!(/<acronym +title="([^"]+)">(.+?)<\/acronym>/i, '\2 (\1)')
   str.gsub!(/<acronym>(.+?)<\/acronym>/i, '\1')
   str.gsub!(/<pre>(.+?)<\/pre>/im) do |s|

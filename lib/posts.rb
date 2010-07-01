@@ -24,15 +24,16 @@ ROR.transaction do
     body  = title if body == ''
     $stdout.print '.' if id % 100 == 0
     ROR[:posts].insert(
-      :id         => id,
-      :state      => 'published',
-      :title      => title,
-      :body       => post[:body],
-      :wiki_body  => body,
-      :user_id    => post[:user_id],
-      :forum_id   => post[:group_id],
-      :created_at => post[:timestamp],
-      :updated_at => post[:timestamp]
+      :id             => id,
+      :state          => 'published',
+      :title          => title,
+      :body           => post[:body],
+      :wiki_body      => body,
+      :truncated_body => truncate_html(body)
+      :user_id        => post[:user_id],
+      :forum_id       => post[:group_id],
+      :created_at     => post[:timestamp],
+      :updated_at     => post[:timestamp]
     )
     ROR[:nodes].insert(
       :content_id   => id,
