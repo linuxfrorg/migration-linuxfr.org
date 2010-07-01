@@ -70,6 +70,7 @@ end
 #   nl2br("foo\nbar")   # => "foo<br/>\nbar"
 #
 def nl2br(txt)
+  return '' if txt.nil?
   txt.gsub(/\n/, "<br/>\n").gsub(/(<\/?)acronym/, '\1abbr')
 end
 

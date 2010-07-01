@@ -40,7 +40,7 @@ def materialized_path(comment)
   path
 end
 
-def NodeId
+class NodeId
   def initialize
     @cache = {}
   end

@@ -31,7 +31,7 @@ ROR.transaction do
       :title          => title,
       :owner_id       => diary[:user_id],
       :body           => diary[:body],
-      :truncated_body => truncate_html(body)
+      :truncated_body => truncate_html(body),
       :wiki_body      => body,
       :created_at     => diary[:timestamp],
       :updated_at     => diary[:timestamp]
