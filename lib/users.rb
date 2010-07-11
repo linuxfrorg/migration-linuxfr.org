@@ -25,25 +25,26 @@ ROR.transaction do
     email = user[:email].strip
     email = "user-#{id}@dlfp.org" if email.nil? || email == ""
     ROR[:users].insert(
-      :id           => id,
-      :name         => name.strip,
-      :homesite     => user[:homesite],
-      :jabber_id    => user[:jabber_id],
-      :role         => role,
-      :created_at   => user[:created],
-      :updated_at   => user[:created]
+      :id            => id,
+      :name          => name.strip,
+      :homesite      => user[:homesite],
+      :jabber_id     => user[:jabber_id],
+      :role          => role,
+      :created_at    => user[:created],
+      :updated_at    => user[:created]
     )
     ROR[:accounts].insert(
-      :id           => id,
-      :user_id      => id,
-      :login        => user[:login].strip,
-      :email        => email,
-      :old_password => user[:passwd],
-      :karma        => karma,
-      :nb_votes     => 5,
-      :confirmed_at => (state != "deleted") ? user[:created] : nil,
-      :created_at   => user[:created],
-      :updated_at   => user[:created]
+      :id            => id,
+      :user_id       => id,
+      :login         => user[:login].strip,
+      :email         => email,
+      :old_password  => user[:passwd],
+      :karma         => karma,
+      :nb_votes      => 5,
+      :confirmed_at  => (state != "deleted") ? user[:created] : nil,
+      :password_salt => '$01$01$0123456789012345678901'
+      :created_at    => user[:created],
+      :updated_at    => user[:created]
     )
     $stdout.print '.' if id % 100 == 0
   end
