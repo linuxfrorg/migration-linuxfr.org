@@ -34,16 +34,20 @@ LEFT JOIN news_attachements AS pj ON n.id = pj.news_id AND pj.id NOT IN (6, 8, 4
     $stdout.print '.' if news[:id] % 100 == 0
     published = news[:state].to_i == 1
     moderator_id = TPL[:news_moderated].filter(:news_id => news[:id]).get(:user_id)
+    author_email = news[:author_contact]
+    author_email = "anonyme@linuxfr.org" if author_email.to_s == ""
+    title = news[:title].strip
+    title = "Pas de titre" if title == ""
     ROR[:news].insert(
       :id           => news[:id],
       :state        => (published ? 'published' : 'refused'),
-      :title        => news[:title].strip,
+      :title        => title,
       :body         => nl2br(news[:body]),
       :second_part  => nl2br(news[:second_part]),
       :moderator_id => moderator_id,
       :section_id   => news[:topic_id] || 1,
       :author_name  => news[:author_name],
-      :author_email => news[:author_contact],
+      :author_email => author_email,
       :created_at   => news[:timestamp],
       :updated_at   => news[:timestamp]
     )

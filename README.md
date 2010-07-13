@@ -91,7 +91,7 @@ Dans ce répertoire :
 Coté Rails :
 
     $ rake ts:index
-    $ for m in User Section Diary Forum News Poll Post
+    $ for m in Section Forum Poll Diary Post News User
       do
         rake friendly_id:make_slugs MODEL=$m
       done
