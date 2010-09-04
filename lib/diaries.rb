@@ -27,7 +27,6 @@ ROR.transaction do
     $stdout.print '.' if id % 100 == 0
     ROR[:diaries].insert(
       :id             => id,
-      :state          => 'published',
       :title          => title,
       :owner_id       => diary[:user_id],
       :body           => diary[:body],

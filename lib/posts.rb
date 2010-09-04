@@ -25,7 +25,6 @@ ROR.transaction do
     $stdout.print '.' if id % 100 == 0
     ROR[:posts].insert(
       :id             => id,
-      :state          => 'published',
       :title          => title,
       :body           => post[:body],
       :wiki_body      => body,
