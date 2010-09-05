@@ -8,9 +8,9 @@ require 'redis'
 $stdout.sync = true
 
 cfg = YAML.load_file('config.yml')
-TPL = Sequel.mysql(cfg['templeet'])
+TPL = Sequel.mysql2(cfg['templeet'])
 TPL.run('set names latin1')
-ROR = Sequel.mysql(cfg['rails'])
+ROR = Sequel.mysql2(cfg['rails'])
 RED = Redis.new
 
 load "lib/constants.rb"

@@ -42,7 +42,7 @@ ROR.transaction do
       :karma         => karma,
       :nb_votes      => 5,
       :confirmed_at  => (state != "deleted") ? user[:created] : nil,
-      :password_salt => '$01$01$0123456789012345678901'
+      :password_salt => '$01$01$0123456789012345678901',
       :created_at    => user[:created],
       :updated_at    => user[:created]
     )

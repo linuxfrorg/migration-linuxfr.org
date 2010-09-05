@@ -33,7 +33,7 @@ LEFT JOIN news_attachements AS pj ON n.id = pj.news_id AND pj.id NOT IN (6, 8, 4
   TPL.fetch(sql) do |news|
     $stdout.print '.' if news[:id] % 100 == 0
     published = news[:state].to_i == 1
-    moderator_id = TPL[:news_moderated].filter(:news_id => news[:id]).get(:user_id)
+    moderator_id = TPL[:news_moderated].filter(:news_id => news[:id]).get(:user_id).to_i
     author_email = news[:author_contact]
     author_email = "anonyme@linuxfr.org" if author_email.to_s == ""
     title = news[:title].strip
