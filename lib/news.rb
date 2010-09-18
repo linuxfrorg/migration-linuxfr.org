@@ -1,3 +1,4 @@
+# encoding: utf-8
 ##
 # News & News_attachements & News_author & News_moderated -> News & Nodes
 #

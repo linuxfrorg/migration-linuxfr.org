@@ -1,3 +1,4 @@
+# encoding: utf-8
 ##
 # News_urls -> Links
 #

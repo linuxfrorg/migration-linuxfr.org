@@ -1,3 +1,4 @@
+# encoding: utf-8
 ##
 # Try to convert HTML to LinuxFr Flavord Markdown with regexps
 #
@@ -12,8 +13,14 @@
 def wikify(str)
   return "" if str.nil?
 
+  str = str.force_encoding('utf-8').encode
   str = str.strip
-  str.gsub!(/<\/?p>/i, "\n")
+  begin
+    str.gsub!(/<\/?p>/i, "\n")
+  rescue ArgumentError
+    str = str.force_encoding("iso-8859-15").encode("utf-8")
+    retry
+  end
   str.gsub!(/<a href="([^"]+)"><a href="[^"]+">(.+?)<\/a><\/a>/i) { "[#{$2.tr('[]', '()')}](#{$1})" }
   str.gsub!(/<a href="([^"]+)"><img src="([^"]+)" alt="([^"]+)"[^>]*><\/a>/i, '[![\3](\2)](\1)')
   str.gsub!(/<a href="([^"]+)"><img src="([^"]+)"[^>]*><\/a>/i, '[![](\2)](\1)')
@@ -71,6 +78,7 @@ end
 #
 def nl2br(txt)
   return '' if txt.nil?
+  txt = txt.force_encoding('utf-8')
   txt.gsub(/\n/, "<br/>\n").gsub(/(<\/?)acronym/, '\1abbr')
 end
 

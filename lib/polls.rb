@@ -1,3 +1,4 @@
+# encoding: utf-8
 ##
 # Poll_questions -> Polls & Nodes
 # Poll_answers -> Poll_answers

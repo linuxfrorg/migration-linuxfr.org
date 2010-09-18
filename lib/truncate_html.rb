@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Inspired from:
 #   * http://trueparadox.net/posts/truncating_text_with_html_tags
 #   * http://gist.github.com/101410

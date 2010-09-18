@@ -1,3 +1,4 @@
+# encoding: utf-8
 ##
 # Comments_scored_user -> Relevances
 #
