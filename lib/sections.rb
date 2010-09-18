@@ -11,7 +11,7 @@ puts "\n____( Topics )__________________________________________________________
 ROR.transaction do
   TPL[:topics].select(:id, :topic, :state).each do |topic|
     state = topic[:state].to_i == 0 ? 'archived' : 'published'
-    title = topic[:topic].strip
+    title = topic[:topic].strip.force_encoding('utf-8')
     ROR[:sections].insert(
       :id                 => topic[:id],
       :state              => state,

@@ -9,7 +9,7 @@ puts "\n____( Tags )____________________________________________________________
 
 ROR.transaction do
   TPL[:sections].select(:id, :section).each do |section|
-    name = section[:section].strip.downcase
+    name = section[:section].strip.force_encoding('utf-8').downcase
     name.tr!(' ', '_')
     id = ROR[:tags].insert(
       :id             => section[:id],

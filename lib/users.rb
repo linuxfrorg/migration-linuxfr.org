@@ -17,19 +17,20 @@ ROR.transaction do
     name  = [user[:fname], user[:lname]].compact
     name  = name.join(' ').strip
     name  = name.empty? ? user[:login] : name
+    name  = name.strip.force_encoding('utf-8')
     state = user[:status].to_i == 2 ? "deleted" : "active"
     role  = state == "active" ? "moule" : "inactive"
     role  = "reviewer"  if user[:level].to_i & (2**17) > 0
     role  = "moderator" if user[:level].to_i & (2**21) > 0
     role  = "admin"     if user[:level].to_i & (2**22) > 0
     karma = TPL[:users_karma].filter(:user_id => id).get(:experience) || 20
-    email = user[:email].strip
+    email = user[:email].strip.force_encoding('utf-8')
     email = "user-#{id}@dlfp.org" if email.nil? || email == ""
     ROR[:users].insert(
       :id            => id,
-      :name          => name.strip,
-      :homesite      => user[:homesite],
-      :jabber_id     => user[:jabber_id],
+      :name          => name,
+      :homesite      => user[:homesite].force_encoding('utf-8'),
+      :jabber_id     => user[:jabber_id].force_encoding('utf-8'),
       :role          => role,
       :created_at    => user[:created],
       :updated_at    => user[:created]
@@ -37,9 +38,9 @@ ROR.transaction do
     ROR[:accounts].insert(
       :id            => id,
       :user_id       => id,
-      :login         => user[:login].strip,
+      :login         => user[:login].strip.force_encoding('utf-8'),
       :email         => email,
-      :old_password  => user[:passwd],
+      :old_password  => user[:passwd].force_encoding('utf-8'),
       :karma         => karma,
       :nb_votes      => 5,
       :confirmed_at  => (state != "deleted") ? user[:created] : nil,

@@ -93,6 +93,6 @@ Coté Rails :
     $ rake ts:index
     $ for m in Section Forum Poll Diary Post News User
       do
-        rake friendly_id:make_slugs MODEL=$m
+        rake friendly_id:make_slugs MODEL=$m >> log/friendly.log
       done
 

@@ -14,8 +14,8 @@ ROR.transaction do
     ROR[:links].insert(
       :id         => link[:id],
       :news_id    => link[:news_id],
-      :title      => link[:name].strip,
-      :url        => link[:url].strip,
+      :title      => link[:name].strip.force_encoding('utf-8'),
+      :url        => link[:url].strip.force_encoding('utf-8'),
       :lang       => lang(link[:lang_id]),
       :created_at => 'NOW()'.lit,
       :updated_at => 'NOW()'.lit

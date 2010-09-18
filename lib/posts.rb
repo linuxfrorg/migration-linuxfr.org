@@ -27,7 +27,7 @@ ROR.transaction do
     ROR[:posts].insert(
       :id             => id,
       :title          => title,
-      :body           => post[:body],
+      :body           => nl2br(post[:body]),
       :wiki_body      => body,
       :truncated_body => truncate_html(body),
       :owner_id       => post[:user_id],
