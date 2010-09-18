@@ -14,6 +14,11 @@ TPL.run('set names latin1')
 ROR = Sequel.mysql2(cfg['rails'])
 RED = Redis.new
 
+# hack
+def nil.force_encoding(*args)
+  nil
+end
+
 load "lib/constants.rb"
 load "lib/utils.rb"
 load "lib/truncate_html.rb"
