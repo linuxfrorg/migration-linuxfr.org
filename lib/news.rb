@@ -37,7 +37,7 @@ LEFT JOIN news_attachements AS pj ON n.id = pj.news_id AND pj.id NOT IN (6, 8, 4
     moderator_id = TPL[:news_moderated].filter(:news_id => news[:id]).get(:user_id).to_i
     author_email = news[:author_contact]
     author_email = "anonyme@linuxfr.org" if author_email.to_s == ""
-    title = news[:title].strip.force_encoding('utf-8')
+    title = no_tags(news[:title])
     title = "Pas de titre" if title == ""
     ROR[:news].insert(
       :id           => news[:id],

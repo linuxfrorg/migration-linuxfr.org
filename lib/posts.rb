@@ -19,7 +19,7 @@ ROR.transaction do
   EOS
   TPL.fetch(sql, ResTypes.index('post')) do |post|
     id = post[:id]
-    title = post[:subject].strip
+    title = no_tags(post[:subject])
     title = id.to_s if title == ''
     body  = wikify(post[:body])
     body  = title if body == ''

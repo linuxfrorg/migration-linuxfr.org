@@ -70,7 +70,7 @@ ROR.transaction do
       :node_id           => node_id,
       :user_id           => $user_id[id],
       :state             => state,
-      :title             => comment[:subject].strip.force_encoding('utf-8'),
+      :title             => no_tags(comment[:subject]),
       :body              => comment[:body].force_encoding('utf-8'),
       :wiki_body         => wikify(comment[:body]),
       :score             => comment[:score],

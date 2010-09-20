@@ -89,6 +89,23 @@ end
 
 
 ##
+# Supprime toutes les balises HTML
+#
+#    no_tags("Le <b>gras</b>, c'est la vie")   # => "Le gras c'est la vie"
+#
+def no_tags(txt)
+  return '' if txt.nil?
+  txt = txt.force_encoding('utf-8')
+  begin
+    txt.strip.gsub(/<[^>]*>/, '')
+  rescue ArgumentError
+    txt = txt.force_encoding("iso-8859-15").encode("utf-8")
+    retry
+  end
+end
+
+
+##
 # Renvoie le code à 2 lettres d'une lang identifiée par son id
 #
 #   lang(1)   # => 'fr'

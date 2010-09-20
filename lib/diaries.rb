@@ -20,7 +20,7 @@ ROR.transaction do
   EOS
   TPL.fetch(sql, ResTypes.index('diary')) do |diary|
     id    = diary[:id]
-    title = diary[:subject].strip.force_encoding('utf-8')
+    title = no_tags(diary[:subject])
     title = id.to_s if title == ''
     title = "(#{id}) #{title}" if [4, 303, 1074, 1302, 1825, 3611, 4384, 6232, 9055, 10357, 18512, 24755].include?(id)
     body  = wikify(diary[:body])

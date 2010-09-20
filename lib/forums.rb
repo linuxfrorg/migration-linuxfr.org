@@ -18,7 +18,7 @@ ROR.transaction do
     ROR[:forums].insert(
       :id         => forum[:id],
       :state      => state,
-      :title      => name.strip.force_encoding('utf-8'),
+      :title      => no_tags(name),
       :position   => position,
       :created_at => 'NOW()'.lit,
       :updated_at => 'NOW()'.lit
