@@ -5,6 +5,7 @@ require 'rubygems'
 require 'yaml'
 require 'sequel'
 require 'redis'
+require 'htmlentities'
 
 $stdout.sync = true
 

@@ -89,7 +89,7 @@ end
 
 
 ##
-# Supprime toutes les balises HTML
+# Supprime toutes les balises et entités HTML
 #
 #    no_tags("Le <b>gras</b>, c'est la vie")   # => "Le gras c'est la vie"
 #
@@ -97,12 +97,13 @@ def no_tags(txt)
   return '' if txt.nil?
   txt = txt.force_encoding('utf-8')
   begin
-    txt.strip.gsub(/<[^>]*>/, '')
+    Decoder.decode(txt.strip.gsub(/<[^>]*>/, ''))
   rescue ArgumentError
     txt = txt.force_encoding("iso-8859-15").encode("utf-8")
     retry
   end
 end
+Decoder = HTMLEntities.new
 
 
 ##

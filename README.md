@@ -75,7 +75,7 @@ Coté Rails :
 
 Dans ce répertoire :
 
-    $ gem install mysql2 sequel redis nokogiri
+    $ gem install mysql2 sequel redis nokogiri htmlentities
     $ cp config.yml{.sample,} && vim config.yml
     $ ln -s /path/to/templeet/htdocs templeet
 
