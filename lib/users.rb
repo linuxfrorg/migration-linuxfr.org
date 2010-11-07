@@ -31,7 +31,6 @@ ROR.transaction do
       :name          => name,
       :homesite      => user[:homesite].force_encoding('utf-8'),
       :jabber_id     => user[:jabber_id].force_encoding('utf-8'),
-      :role          => role,
       :created_at    => user[:created],
       :updated_at    => user[:created]
     )
@@ -39,6 +38,7 @@ ROR.transaction do
       :id            => id,
       :user_id       => id,
       :login         => user[:login].strip.force_encoding('utf-8'),
+      :role          => role,
       :email         => email,
       :old_password  => user[:passwd].force_encoding('utf-8'),
       :karma         => karma,
