@@ -6,7 +6,8 @@
 #   Les jointures sur les tables (surtout les LEFT JOINs)
 #   Certains attachements sont au format binaire
 #   7 dépêches ont 2 attachements
-#   34 dépêches ont le state 4 - à purger
+#   275 dépêches ont le state 4 - à purger
+#   Certaines dépêches peuvent encore être dans la file de modération
 #   On peut avoir 0, 1 ou plusieurs utilisateurs qui ont modéré une dépêche
 #
 
@@ -23,7 +24,8 @@ ROR.transaction do
 LEFT JOIN interest          AS i  ON n.id = i.res_id AND res_type = 1
 LEFT JOIN news_author       AS a  ON a.id = n.author_id
 LEFT JOIN news_attachements AS pj ON n.id = pj.news_id AND pj.id NOT IN (6, 8, 46, 159, 195, 197, 206)
-    WHERE n.state != 4
+    WHERE n.state != 0
+      AND n.state != 4
       AND (
                pj.content_type IS NULL
             OR pj.content_type = ''
