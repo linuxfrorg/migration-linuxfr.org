@@ -96,3 +96,5 @@ Coté Rails :
         rake friendly_id:make_slugs MODEL=$m
       done | tee log/friendly.log
 
+Éventuellement, promouvoir une dépêche à la une et mettre une bannière.
+

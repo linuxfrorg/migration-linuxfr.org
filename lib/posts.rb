@@ -29,7 +29,7 @@ ROR.transaction do
       :title          => title,
       :body           => nl2br(post[:body]),
       :wiki_body      => body,
-      :truncated_body => truncate_html(body),
+      :truncated_body => truncate_html(post[:body]),
       :forum_id       => post[:group_id],
       :created_at     => post[:timestamp],
       :updated_at     => post[:timestamp]
