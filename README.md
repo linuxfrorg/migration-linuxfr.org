@@ -90,11 +90,10 @@ Dans ce répertoire :
 
 Coté Rails :
 
-    $ rake ts:index
     $ for m in User Section Forum Poll Diary Post News
       do
         rake friendly_id:make_slugs MODEL=$m
       done | tee log/friendly.log
 
+Réassigner les journaux qui n'appartient plus à personne (id invalides) à Anonyme.
 Éventuellement, promouvoir une dépêche à la une et mettre une bannière.
-
