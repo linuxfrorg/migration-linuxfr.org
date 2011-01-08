@@ -16,10 +16,6 @@ ROR.transaction do
       :id                 => topic[:id],
       :state              => state,
       :title              => title,
-      :image_file_name    => "#{title}.png",
-      :image_content_type => "image/png",
-      :image_file_size    => File.stat("templeet/images/section/#{title}.png").size,
-      :image_updated_at   => 'NOW()'.lit,
       :created_at         => 'NOW()'.lit,
       :updated_at         => 'NOW()'.lit
     )
