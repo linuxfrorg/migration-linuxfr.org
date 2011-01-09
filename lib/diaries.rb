@@ -30,7 +30,7 @@ ROR.transaction do
       :id             => id,
       :title          => title,
       :owner_id       => diary[:user_id],
-      :body           => nl2br(diary[:body]),
+      :body           => $sanitizer.sanitize(nl2br(diary[:body])),
       :truncated_body => truncate_html(diary[:body]),
       :wiki_body      => body,
       :created_at     => diary[:timestamp],

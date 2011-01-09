@@ -6,6 +6,8 @@ require 'yaml'
 require 'sequel'
 require 'redis'
 require 'htmlentities'
+require 'cgi'
+require 'action_controller'
 
 $stdout.sync = true
 
@@ -14,6 +16,11 @@ TPL = Sequel.mysql2(cfg['templeet'])
 TPL.run('set names latin1')
 ROR = Sequel.mysql2(cfg['rails'])
 RED = Redis.new
+
+$sanitizer = HTML::WhiteListSanitizer.new
+$sanitizer.allowed_tags.merge %w(q u s table tr td th video)
+$sanitizer.allowed_attributes.merge %w(id lang)
+$sanitizer.allowed_protocols.merge %w(git)
 
 # hack
 def nil.force_encoding(*args)

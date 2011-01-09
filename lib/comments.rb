@@ -71,7 +71,7 @@ ROR.transaction do
       :user_id           => $user_id[id],
       :state             => state,
       :title             => no_tags(comment[:subject]),
-      :body              => comment[:body].force_encoding('utf-8'),
+      :body              => $sanitizer.sanitize(comment[:body].force_encoding('utf-8')),
       :wiki_body         => wikify(comment[:body]),
       :score             => comment[:score],
       :answered_to_self  => to_self,

@@ -27,7 +27,7 @@ ROR.transaction do
     ROR[:posts].insert(
       :id             => id,
       :title          => title,
-      :body           => nl2br(post[:body]),
+      :body           => $sanitizer.sanitize(nl2br(post[:body])),
       :wiki_body      => body,
       :truncated_body => truncate_html(post[:body]),
       :forum_id       => post[:group_id],

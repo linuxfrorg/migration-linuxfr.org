@@ -75,7 +75,7 @@ Coté Rails :
 
 Dans ce répertoire :
 
-    $ gem install mysql2 sequel redis nokogiri htmlentities
+    $ gem install mysql2 sequel redis nokogiri htmlentities actionpack
     $ cp config.yml{.sample,} && vim config.yml
 
     $ mysql -u root
