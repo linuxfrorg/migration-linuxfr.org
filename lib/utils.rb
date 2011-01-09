@@ -117,5 +117,5 @@ def lang(id)
     h[l[:id]] = l[:lang]
     h
   end
-  $langs[id]
+  $langs[id] || 'xx'
 end
