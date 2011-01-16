@@ -8,6 +8,7 @@ require 'redis'
 require 'htmlentities'
 require 'cgi'
 require 'action_controller'
+require 'digest/md5'
 
 $stdout.sync = true
 

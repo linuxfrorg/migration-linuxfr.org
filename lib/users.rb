@@ -31,6 +31,7 @@ ROR.transaction do
       :name          => name,
       :homesite      => user[:homesite].force_encoding('utf-8'),
       :jabber_id     => user[:jabber_id].force_encoding('utf-8'),
+      :gravatar_hash => Digest::MD5.hexdigest(email.downcase),
       :created_at    => user[:created],
       :updated_at    => user[:created]
     )
