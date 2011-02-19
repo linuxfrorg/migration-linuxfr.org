@@ -81,7 +81,9 @@ def nl2br(txt)
   return '' if txt.nil?
   txt = txt.force_encoding('utf-8')
   begin
-    txt.gsub(/\n/, "<br/>\n").gsub(/(<\/?)acronym/, '\1abbr')
+    tmp = txt.gsub(/(<\/?)acronym/, '\1abbr')
+    return tmp if tmp =~ /<br\s*\/>/
+    tmp.gsub(/\n/, "<br/>\n")
   rescue ArgumentError
     txt = txt.force_encoding("iso-8859-15").encode("utf-8")
     retry
