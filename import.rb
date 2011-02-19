@@ -16,7 +16,7 @@ cfg = YAML.load_file('config.yml')
 TPL = Sequel.mysql2(cfg['templeet'])
 TPL.run('set names latin1')
 ROR = Sequel.mysql2(cfg['rails'])
-RED = Redis.new(:host => `hostname`)
+RED = Redis.new(:host => `hostname`.chomp)
 
 $sanitizer = HTML::WhiteListSanitizer.new
 $sanitizer.allowed_tags.merge %w(q u s table tr td th video)
